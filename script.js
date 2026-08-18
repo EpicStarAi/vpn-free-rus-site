@@ -1,0 +1,1 @@
+document.querySelector('#pilot-form').addEventListener('submit',function(event){event.preventDefault();const message=this.querySelector('.form-message');message.textContent='Заявка подготовлена. Подключение формы к Telegram/CRM будет выполнено перед запуском.';this.querySelector('button').disabled=true;});
