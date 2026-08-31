@@ -1,0 +1,26 @@
+[Unit]
+Description=FREE RUS private AmneziaWG provisioning API
+After=network-online.target awg-quick@awg0.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+EnvironmentFile=/etc/free-rus-vpn/provisioner.env
+ExecStart=/usr/bin/python3 /opt/free-rus-vpn/provisioner/app.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectHome=true
+ProtectSystem=full
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ReadWritePaths=/etc/amnezia/amneziawg /var/lib/free-rus-vpn
+CapabilityBoundingSet=CAP_NET_ADMIN
+AmbientCapabilities=CAP_NET_ADMIN
+
+[Install]
+WantedBy=multi-user.target
