@@ -5,6 +5,7 @@ from pathlib import Path
 
 TOKEN=os.environ["FREE_RUS_BOT_TOKEN"]; PROVISION_TOKEN=os.environ["FREE_RUS_PROVISIONER_TOKEN"]
 TG=f"https://api.telegram.org/bot{TOKEN}"; PROVISION=os.getenv("FREE_RUS_PROVISIONER_URL","http://127.0.0.1:8786")
+WEB_APP_URL=os.getenv("FREE_RUS_WEB_APP_URL","https://vpn.freerus.site/client/").rstrip("/")
 DATA=Path(os.getenv("FREE_RUS_BOT_DATA","/var/lib/free-rus-sales-bot")); DB=DATA/"sales.sqlite3"
 PLANS={"trial":("Тест VPN FREE RUS — 3 дня",0,3),"month":("VPN FREE RUS — первый месяц",99,30),"renew":("VPN FREE RUS — 1 месяц",199,30),"year":("VPN FREE RUS — 1 год",1199,365)}
 
@@ -41,6 +42,7 @@ def provision(user,plan,days):
 
 def show_menu(chat):
     message(chat,"VPN FREE RUS\n\n🆓 Тест — 3 дня бесплатно\n⭐ Первый месяц — 99 Stars\n⭐ Далее — 199 Stars/месяц\n⭐ Годовой — 1 199 Stars",[
+      [{"text":"📱 Открыть приложение","web_app":{"url":WEB_APP_URL}}],
       [{"text":"🆓 Тест 3 дня","callback_data":"trial"}],
       [{"text":"⭐ Первый месяц — 99 Stars","callback_data":"month"}],
       [{"text":"⭐ Годовой — 1 199 Stars","callback_data":"year"}],
