@@ -6,6 +6,9 @@ from pathlib import Path
 TOKEN=os.environ["FREE_RUS_BOT_TOKEN"]; PROVISION_TOKEN=os.environ["FREE_RUS_PROVISIONER_TOKEN"]
 TG=f"https://api.telegram.org/bot{TOKEN}"; PROVISION=os.getenv("FREE_RUS_PROVISIONER_URL","http://127.0.0.1:8786")
 WEB_APP_URL=os.getenv("FREE_RUS_WEB_APP_URL","https://vpn.freerus.site/client/").rstrip("/")
+SUPPORT_URL=os.getenv("FREE_RUS_SUPPORT_URL","https://t.me/INTERNET_BEZ_GRANIC")
+TERMS_URL=os.getenv("FREE_RUS_TERMS_URL","https://freerus.site/terms")
+REFUNDS_URL=os.getenv("FREE_RUS_REFUNDS_URL","https://freerus.site/refunds")
 DATA=Path(os.getenv("FREE_RUS_BOT_DATA","/var/lib/free-rus-sales-bot")); DB=DATA/"sales.sqlite3"
 PLANS={"trial":("Тест VPN FREE RUS — 3 дня",0,3),"month":("VPN FREE RUS — первый месяц",99,30),"renew":("VPN FREE RUS — 1 месяц",199,30),"year":("VPN FREE RUS — 1 год",1199,365)}
 
@@ -40,13 +43,19 @@ def provision(user,plan,days):
     req=urllib.request.Request(f"{PROVISION}/v1/clients",data=body,headers={"Content-Type":"application/json","Authorization":f"Bearer {PROVISION_TOKEN}"})
     with urllib.request.urlopen(req,timeout=35) as r:return json.load(r)
 
+def support_menu(chat):
+    return message(chat,"Поддержка и документы VPN FREE RUS",[
+      [{"text":"💬 Написать в поддержку","url":SUPPORT_URL}],
+      [{"text":"📄 Условия сервиса","url":TERMS_URL},{"text":"↩️ Возврат","url":REFUNDS_URL}]])
+
 def show_menu(chat):
     message(chat,"VPN FREE RUS\n\n🆓 Тест — 3 дня бесплатно\n⭐ Первый месяц — 99 Stars\n⭐ Далее — 199 Stars/месяц\n⭐ Годовой — 1 199 Stars",[
       [{"text":"📱 Открыть приложение","web_app":{"url":WEB_APP_URL}}],
       [{"text":"🆓 Тест 3 дня","callback_data":"trial"}],
       [{"text":"⭐ Первый месяц — 99 Stars","callback_data":"month"}],
       [{"text":"⭐ Годовой — 1 199 Stars","callback_data":"year"}],
-      [{"text":"🎁 Реферальная программа","callback_data":"ref"}]])
+      [{"text":"🎁 Реферальная программа","callback_data":"ref"}],
+      [{"text":"💬 Поддержка, условия и возврат","callback_data":"support"}]])
 
 def send_invoice(chat,user,plan):
     title,stars,days=PLANS[plan]; payload=f"fr-{plan}-{uuid.uuid4().hex}"
@@ -82,6 +91,7 @@ def handle(update):
         if action=="trial":return trial(chat,user)
         if action in ("month","year","renew"):return send_invoice(chat,user,action)
         if action=="ref":return message(chat,"🎁 После первой покупки бот выдаст персональную реферальную ссылку. Когда друг оплатит первый период, вам обоим добавится по 14 дней.")
+        if action=="support":return support_menu(chat)
         return
     if "pre_checkout_query" in update:
         q=update["pre_checkout_query"];con=database();row=con.execute("SELECT status FROM orders WHERE payload=?",(q["invoice_payload"],)).fetchone();con.close()
@@ -90,6 +100,7 @@ def handle(update):
     if not chat:return
     if "successful_payment" in m:return paid(chat,user,m["successful_payment"])
     text=m.get("text",""); start=text.split(maxsplit=1)[1] if text.startswith("/start ") else ""
+    if text in ("/support","/paysupport","/terms","/refunds"):return support_menu(chat)
     if start in ("buy_month","month"):return send_invoice(chat,user,"month")
     if start in ("buy_year","year"):return send_invoice(chat,user,"year")
     if start=="trial":return trial(chat,user)
