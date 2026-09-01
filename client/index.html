@@ -1,5 +1,49 @@
 <!doctype html>
 <html lang="ru">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0a0d13"><meta name="description" content="FREE RUS VPN — простой личный кабинет и подключение VPN."><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css"><title>FREE RUS VPN</title></head>
-<body><main class="app-shell"><header class="topbar"><a class="brand" href="#top" aria-label="FREE RUS VPN">FREE RUS <span>VPN</span></a><button class="install-button" type="button" data-install hidden>Установить</button></header><section class="screen" id="top" aria-labelledby="title"><p class="eyebrow">ЛИЧНЫЙ КАБИНЕТ</p><h1 id="title">Готово.<br>Осталось 2 шага.</h1><p class="intro">Выберите тариф, оплатите в Telegram — дальше мы выдадим доступ и проведём к подключению.</p><ol class="steps" aria-label="Шаги подключения"><li class="step is-active"><span class="step-number">1</span><div class="step-copy"><strong>Выберите тариф</strong><small>Тест 3 дня бесплатно или подписка</small></div><button class="primary" type="button" data-action="plans">Выбрать</button></li><li class="step"><span class="step-number">2</span><div class="step-copy"><strong>Оплатите в Telegram</strong><small>Без карт на сайте — оплата Stars</small></div><a class="primary is-disabled" data-payment-link href="https://t.me/FREE_RUS_VPN_BOT?start=trial">Перейти</a></li></ol><section class="plans" data-plans hidden aria-labelledby="plans-title"><div class="plans-heading"><h2 id="plans-title">Выберите доступ</h2><button type="button" class="text-button" data-action="close-plans">Закрыть</button></div><button class="plan" type="button" data-plan="trial" data-link="https://t.me/FREE_RUS_VPN_BOT?start=trial"><span>Тест</span><strong>3 дня бесплатно</strong><small>Проверьте сервис без оплаты</small></button><button class="plan" type="button" data-plan="month" data-link="https://t.me/FREE_RUS_VPN_BOT?start=buy_month"><span>Первый месяц</span><strong>149 ₽</strong><small>Далее — 249 ₽ в месяц</small></button><button class="plan" type="button" data-plan="year" data-link="https://t.me/FREE_RUS_VPN_BOT?start=buy_year"><span>Годовой</span><strong>1 490 ₽</strong><small>Самая выгодная цена</small></button></section><section class="after-payment" aria-labelledby="after-payment-title"><p class="eyebrow">ПОСЛЕ ОПЛАТЫ</p><h2 id="after-payment-title">Нажмите «Получить доступ» в боте</h2><p>Бот пришлёт ваш личный файл подключения и простую инструкцию. Не нужно искать настройки или писать в поддержку.</p></section><aside class="help"><strong>Нужна помощь?</strong><span>Напишите боту — он покажет, что делать дальше.</span><a href="https://t.me/FREE_RUS_VPN_BOT">Открыть поддержку</a></aside></section></main><script src="script.js"></script></body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#05070a">
+  <meta name="description" content="FREE RUS VPN — простой доступ к защищённому интернету.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>FREE RUS VPN</title>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="FREE RUS VPN"><span class="brand-lock">▣</span><span>FREE</span> <b>RUS</b> VPN</a>
+      <button class="install-button" type="button" data-install hidden>Установить</button>
+    </header>
+    <section class="screen" id="top" aria-labelledby="title">
+      <p class="eyebrow">ЗАЩИЩЁННОЕ ПОДКЛЮЧЕНИЕ</p>
+      <h1 id="title">Интернет<br>под контролем.</h1>
+      <p class="intro">Оформите доступ в Telegram за минуту. После оплаты бот выдаст персональные данные для подключения.</p>
+      <section class="connection-card" aria-label="Статус доступа">
+        <div class="status-dot"></div>
+        <div><strong>Доступ выдаёт FREE RUS VPN</strong><small>Выберите тариф — бот проведёт дальше</small></div>
+      </section>
+      <a class="connect-button" href="https://t.me/FREE_RUS_VPN_BOT?start=trial">Получить доступ</a>
+      <a class="support-link" href="https://t.me/FREE_RUS_VPN_BOT?start=trial">У меня уже есть доступ</a>
+      <section class="how" aria-labelledby="how-title">
+        <p class="eyebrow">КАК ЭТО РАБОТАЕТ</p>
+        <h2 id="how-title">Три простых шага</h2>
+        <ol>
+          <li><span>01</span><div><strong>Выберите тариф</strong><small>Тест 3 дня бесплатно или подписка</small></div></li>
+          <li><span>02</span><div><strong>Оплатите Stars</strong><small>Оплата проходит внутри Telegram</small></div></li>
+          <li><span>03</span><div><strong>Получите доступ</strong><small>Бот отправит всё необходимое и поможет с подключением</small></div></li>
+        </ol>
+      </section>
+      <section class="plans" aria-labelledby="plans-title">
+        <p class="eyebrow">ТАРИФЫ</p>
+        <h2 id="plans-title">Без скрытых условий</h2>
+        <a class="plan" href="https://t.me/FREE_RUS_VPN_BOT?start=trial"><span>Тест</span><strong>3 дня бесплатно</strong><small>Проверить сервис без оплаты</small></a>
+        <a class="plan" href="https://t.me/FREE_RUS_VPN_BOT?start=buy_month"><span>Первый месяц</span><strong>99 Stars</strong><small>Далее — 199 Stars в месяц</small></a>
+        <a class="plan" href="https://t.me/FREE_RUS_VPN_BOT?start=buy_year"><span>Годовой</span><strong>1 199 Stars</strong><small>Самая выгодная цена</small></a>
+      </section>
+      <aside class="help"><strong>Нужна помощь?</strong><span>Поддержка отвечает в Telegram.</span><a href="https://t.me/INTERNET_BEZ_GRANIC">Написать в поддержку</a></aside>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
 </html>
