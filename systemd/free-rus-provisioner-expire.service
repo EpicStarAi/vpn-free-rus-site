@@ -1,0 +1,9 @@
+[Unit]
+Description=Expire overdue FREE RUS VPN access
+After=network-online.target free-rus-provisioner.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/free-rus-vpn/provisioner.env
+ExecStart=/usr/bin/python3 -c "import os, urllib.request; r=urllib.request.Request('http://127.0.0.1:8786/v1/maintenance/expire', method='POST', headers={'Authorization':'Bearer ' + os.environ['FREE_RUS_PROVISIONER_TOKEN']}); print(urllib.request.urlopen(r, timeout=30).read().decode())"
