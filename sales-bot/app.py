@@ -91,7 +91,7 @@ def show_menu(chat,user):
       [{'text':monthly,'callback_data':action}],
       [{'text':'⭐ Годовой — 1 199 Stars','callback_data':'year'}],
       [{'text':'🎁 Реферальная программа','callback_data':'ref'}],
-      [{'text':'💬 Поддержка, условия и возврат','callback_data':'support'}])
+      [{'text':'💬 Поддержка, условия и возврат','callback_data':'support'}]])
 
 def send_invoice(chat,user,plan):
     title,stars,days=PLANS[plan]; payload=f'fr-{plan}-{uuid.uuid4().hex}'
