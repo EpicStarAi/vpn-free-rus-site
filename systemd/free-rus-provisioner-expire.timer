@@ -1,0 +1,10 @@
+[Unit]
+Description=Run FREE RUS VPN expiry maintenance hourly
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+Unit=free-rus-provisioner-expire.service
+
+[Install]
+WantedBy=timers.target

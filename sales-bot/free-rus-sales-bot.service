@@ -1,0 +1,25 @@
+[Unit]
+Description=FREE RUS Telegram Stars sales bot
+After=network-online.target free-rus-provisioner.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=free-rus-bot
+Group=free-rus-bot
+EnvironmentFile=/etc/free-rus-sales-bot/bot.env
+ExecStart=/usr/bin/python3 /opt/free-rus-sales-bot/app.py
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectHome=true
+ProtectSystem=full
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ReadWritePaths=/var/lib/free-rus-sales-bot
+
+[Install]
+WantedBy=multi-user.target

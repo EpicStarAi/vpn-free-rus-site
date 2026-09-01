@@ -1,0 +1,96 @@
+{
+  "name": "FREE RUS — Sales & Trial Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ]
+      },
+      "id": "b2a844d2-7bc5-49cb-9384-df4e9665ac7b",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -360,
+        120
+      ],
+      "credentials": {
+        "telegramApi": {
+          "name": "TELEGRAM_FREE_RUS_VPN_BOT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const message = $json.message ?? {};\nconst chatId = message.chat?.id;\nconst text = (message.text ?? '').trim().toLowerCase();\n\nif (!chatId) return [];\n\nlet reply;\nif (text === '/start' || text === 'start' || !text) {\n  reply = `👋 Добро пожаловать в FREE RUS VPN!\n\n🆓 Тестовый доступ — 3 дня без оплаты.\n💳 Первый месяц — 149 ₽, далее 249 ₽/месяц.\n🎁 Пригласите друга: после его первой оплаты вам обоим добавится по 14 дней.\n\nНапишите:\n• ТЕСТ — чтобы оставить заявку на тест;\n• ТАРИФЫ — чтобы посмотреть условия;\n• РЕФЕРАЛ — чтобы узнать про бонус;\n• ПОДДЕРЖКА — чтобы связаться с командой.`;\n} else if (text === 'тест' || text === 'тест 3 дня') {\n  reply = `🆓 Заявка на тестовый доступ принята.\n\nСейчас бот работает в пилотном режиме: доступ подтверждается оператором. Мы напишем вам в этом чате после проверки наличия свободных мест.`;\n} else if (text === 'тарифы' || text === 'тариф') {\n  reply = `💳 Тарифы FREE RUS VPN\n\n• Тест: 3 дня — 0 ₽\n• Стартовый месяц: 149 ₽\n• Далее: 249 ₽/месяц\n• Годовой: 1 490 ₽\n\nПеред оплатой вы увидите способ оплаты и окончательные условия.`;\n} else if (text === 'реферал' || text === 'рефералы') {\n  reply = `🎁 Реферальная программа\n\nПосле активации доступа бот выдаст персональную ссылку. Когда приглашённый пользователь оплатит первый период, вам обоим добавится по 14 дней.`;\n} else if (text === 'поддержка') {\n  reply = `💬 Поддержка FREE RUS VPN\n\nОпишите вопрос одним сообщением. В пилотном режиме мы отвечаем вручную в этом чате.`;\n} else {\n  reply = `Я пока понимаю команды: ТЕСТ, ТАРИФЫ, РЕФЕРАЛ и ПОДДЕРЖКА. Для начала работы отправьте /start.`;\n}\n\nreturn [{ json: { chatId, reply } }];"
+      },
+      "id": "28620b5f-cfbd-4823-a8e3-3b43f72f03c3",
+      "name": "Route Sales Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -100,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $json.chatId }}",
+        "text": "={{ $json.reply }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "01fac4aa-546d-4c30-85a9-da04c19028eb",
+      "name": "Send Sales Reply",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        160,
+        120
+      ],
+      "credentials": {
+        "telegramApi": {
+          "name": "TELEGRAM_FREE_RUS_VPN_BOT"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Route Sales Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route Sales Message": {
+      "main": [
+        [
+          {
+            "node": "Send Sales Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e4b46ca8-6bca-42f4-a411-f2fa4d0d4d03",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
