@@ -1,0 +1,88 @@
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import { VpnPilotForm } from "@/components/VpnPilotForm";
+import { corporateConfig } from "@/data/corporate";
+
+export const metadata: Metadata = {
+  title: "HIDE MY NAME VPN — партнёрский VPN-проект FreeRUS",
+  description: "HIDE MY NAME VPN готовится к пилотному запуску: защищённое подключение для личных устройств, удалённых специалистов и корпоративных команд.",
+};
+
+const benefits = [
+  ["01", "Защищённый канал", "Шифрование соединения при работе в публичных и домашних сетях."],
+  ["02", "Все устройства", "Персональные профили для компьютера, смартфона и планшета."],
+  ["03", "Контроль доступа", "Выдача и отзыв конфигураций для сотрудников и команд."],
+  ["04", "Поддержка", "Помогаем с подключением и проверяем рабочую конфигурацию."],
+] as const;
+
+const audiences = [
+  ["Для себя", "Защищённое подключение на личных устройствах без сложной настройки."],
+  ["Для удалённой работы", "Безопасный доступ сотрудников к корпоративным ресурсам из разных городов."],
+  ["Для бизнеса", "Управление пользователями, несколькими устройствами и политиками доступа."],
+] as const;
+
+const steps = [
+  ["01", "Оставьте заявку", "Укажите тип клиента и количество устройств."],
+  ["02", "Пройдите проверку контура", "Мы уточним задачи и доступную конфигурацию."],
+  ["03", "Получите приглашение", "Подключим участников по мере запуска пилотных групп."],
+] as const;
+
+export default function EpicVpnPage() {
+  return (
+    <main id="main" className="free-vpn-page">
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", name: "HIDE MY NAME VPN", description: metadata.description, provider: { "@type": "Organization", name: corporateConfig.brand }, serviceType: "Партнёрский VPN-проект — подготовка к пилотному запуску", areaServed: "RU" }} />
+      <section className="free-vpn-hero">
+        <div className="free-vpn-shell free-vpn-hero-grid">
+          <div className="free-vpn-hero-copy">
+            <div className="free-vpn-status"><i /> Партнёр FreeRUS · ранний доступ</div>
+            <p className="free-vpn-kicker">HIDE MY NAME VPN</p>
+            <h1>Защищённое подключение. Без лишней сложности.</h1>
+            <p className="free-vpn-lead">Партнёрский VPN-проект для личных устройств, удалённой работы и корпоративных команд. Сейчас формируем первую пилотную группу.</p>
+            <div className="free-vpn-actions">
+              <a className="free-vpn-primary" href="#early-access">Получить ранний доступ</a>
+              <a className="free-vpn-secondary" href="#how-it-works">Как это работает</a>
+            </div>
+            <div className="free-vpn-trust"><span>Без оплаты на этапе заявки</span><span>Ручное подтверждение подключения</span><span>Для людей и компаний</span></div>
+          </div>
+          <div className="free-vpn-console" aria-label="Статус будущей VPN-инфраструктуры">
+            <div className="free-vpn-console-top"><span>HIDE MY NAME / SECURE LINK</span><b>PRE-LAUNCH</b></div>
+            <div className="free-vpn-orbit"><span>VPN</span></div>
+            <dl>
+              <div><dt>Статус</dt><dd>Инфраструктура готовится</dd></div>
+              <div><dt>Профиль</dt><dd>Персональный / корпоративный</dd></div>
+              <div><dt>Устройства</dt><dd>Несколько на пользователя</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section className="free-vpn-strip"><div className="free-vpn-shell free-vpn-benefits">
+        {benefits.map(([number, title, text]) => <article key={title}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}
+      </div></section>
+
+      <section className="free-vpn-section free-vpn-shell" id="how-it-works">
+        <div className="free-vpn-heading"><p>Один сервис · разные сценарии</p><h2>Подключение под вашу задачу</h2></div>
+        <div className="free-vpn-audience-grid">{audiences.map(([title, text], index) => <article key={title}><b>0{index + 1}</b><h3>{title}</h3><p>{text}</p><a href="#early-access">Оставить заявку <span>→</span></a></article>)}</div>
+      </section>
+
+      <section className="free-vpn-dark-section"><div className="free-vpn-shell">
+        <div className="free-vpn-heading free-vpn-heading-light"><p>Пилотный запуск</p><h2>Три шага до подключения</h2></div>
+        <div className="free-vpn-steps">{steps.map(([number, title, text]) => <article key={title}><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div>
+      </div></section>
+
+      <section className="free-vpn-section free-vpn-shell">
+        <div className="free-vpn-heading"><p>Будущие планы</p><h2>Тарифы без мелкого шрифта</h2></div>
+        <div className="free-vpn-plans">
+          <article><span>PERSONAL</span><h3>Личный</h3><p>Для одного пользователя и нескольких личных устройств.</p><strong>Условия — после пилота</strong></article>
+          <article className="featured"><span>TEAM</span><h3>Команда</h3><p>Для небольших компаний и распределённых специалистов.</p><strong>Расчёт после аудита</strong></article>
+          <article><span>BUSINESS</span><h3>Корпоративный</h3><p>Управление доступами, пользователями и конфигурациями.</p><strong>Индивидуальный контур</strong></article>
+        </div>
+      </section>
+
+      <section className="free-vpn-access" id="early-access"><div className="free-vpn-shell free-vpn-access-grid">
+        <div><p className="free-vpn-kicker">Старт пилотной группы</p><h2>Получите приглашение одним из первых</h2><p>Расскажите, сколько устройств нужно подключить. Команда изучит задачу и сообщит о доступной конфигурации.</p><aside>VPN-инфраструктура находится в стадии технической подготовки. Заявка не является покупкой или оформлением действующей подписки.</aside></div>
+        <VpnPilotForm />
+      </div></section>
+    </main>
+  );
+}

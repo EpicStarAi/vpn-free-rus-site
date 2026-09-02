@@ -1,0 +1,222 @@
+{
+  "_framework-CXnKph_e.js": {
+    "file": "assets/framework-CXnKph_e.js",
+    "name": "framework",
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js"
+    ]
+  },
+  "_link-C-LrRkcr.js": {
+    "file": "assets/link-C-LrRkcr.js",
+    "name": "link",
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "virtual:vinext-app-browser-entry",
+      "_framework-CXnKph_e.js"
+    ],
+    "dynamicImports": [
+      "node_modules/vinext/dist/shims/router.js"
+    ]
+  },
+  "_rolldown-runtime-S-ySWqyJ.js": {
+    "file": "assets/rolldown-runtime-S-ySWqyJ.js",
+    "name": "rolldown-runtime"
+  },
+  "_site-BU_zborq.js": {
+    "file": "assets/site-BU_zborq.js",
+    "name": "site"
+  },
+  "_useFormStartedAt-QQBBvn9S.js": {
+    "file": "assets/useFormStartedAt-QQBBvn9S.js",
+    "name": "useFormStartedAt",
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "app/error.tsx": {
+    "file": "assets/error-CxG_ca5G.js",
+    "name": "error",
+    "src": "app/error.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "components/AIInfluencerCatalog.tsx": {
+    "file": "assets/AIInfluencerCatalog-Csxs4VZB.js",
+    "name": "AIInfluencerCatalog",
+    "src": "components/AIInfluencerCatalog.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_useFormStartedAt-QQBBvn9S.js",
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "components/Analytics.tsx": {
+    "file": "assets/Analytics-CjprDdLF.js",
+    "name": "Analytics",
+    "src": "components/Analytics.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "virtual:vinext-app-browser-entry",
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "components/BusinessLeadForm.tsx": {
+    "file": "assets/BusinessLeadForm-BRJNNiNK.js",
+    "name": "BusinessLeadForm",
+    "src": "components/BusinessLeadForm.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_useFormStartedAt-QQBBvn9S.js",
+      "_site-BU_zborq.js",
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "components/ConfigurationCalculator.tsx": {
+    "file": "assets/ConfigurationCalculator-Bja-l0Cb.js",
+    "name": "ConfigurationCalculator",
+    "src": "components/ConfigurationCalculator.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_framework-CXnKph_e.js",
+      "_link-C-LrRkcr.js"
+    ]
+  },
+  "components/CookieNotice.tsx": {
+    "file": "assets/CookieNotice-CDf2wyS_.js",
+    "name": "CookieNotice",
+    "src": "components/CookieNotice.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_framework-CXnKph_e.js",
+      "_link-C-LrRkcr.js"
+    ]
+  },
+  "components/EditorialHome.tsx": {
+    "file": "assets/EditorialHome-Swd0RV7X.js",
+    "name": "EditorialHome",
+    "src": "components/EditorialHome.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_framework-CXnKph_e.js",
+      "_link-C-LrRkcr.js"
+    ]
+  },
+  "components/GuideExplorer.tsx": {
+    "file": "assets/GuideExplorer-DMRRi1g2.js",
+    "name": "GuideExplorer",
+    "src": "components/GuideExplorer.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_framework-CXnKph_e.js",
+      "_link-C-LrRkcr.js"
+    ]
+  },
+  "components/NewsExplorer.tsx": {
+    "file": "assets/NewsExplorer-Bf8BHWBw.js",
+    "name": "NewsExplorer",
+    "src": "components/NewsExplorer.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_framework-CXnKph_e.js",
+      "_link-C-LrRkcr.js"
+    ]
+  },
+  "components/SiteHeader.tsx": {
+    "file": "assets/SiteHeader-DjFRZDO3.js",
+    "name": "SiteHeader",
+    "src": "components/SiteHeader.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "virtual:vinext-app-browser-entry",
+      "_site-BU_zborq.js",
+      "_framework-CXnKph_e.js",
+      "_link-C-LrRkcr.js"
+    ]
+  },
+  "components/SubscribeForm.tsx": {
+    "file": "assets/SubscribeForm-DJqeIGCR.js",
+    "name": "SubscribeForm",
+    "src": "components/SubscribeForm.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_useFormStartedAt-QQBBvn9S.js",
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "components/VpnPilotForm.tsx": {
+    "file": "assets/VpnPilotForm-CosaTAUE.js",
+    "name": "VpnPilotForm",
+    "src": "components/VpnPilotForm.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "node_modules/vinext/dist/shims/layout-segment-context.js": {
+    "file": "assets/layout-segment-context-BHvOyfc8.js",
+    "name": "layout-segment-context",
+    "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "virtual:vinext-app-browser-entry",
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "node_modules/vinext/dist/shims/router.js": {
+    "file": "assets/router-B0DlRCC4.js",
+    "name": "router",
+    "src": "node_modules/vinext/dist/shims/router.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "virtual:vinext-app-browser-entry",
+      "_framework-CXnKph_e.js",
+      "_link-C-LrRkcr.js"
+    ],
+    "dynamicImports": [
+      "_framework-CXnKph_e.js"
+    ]
+  },
+  "virtual:vinext-app-browser-entry": {
+    "file": "assets/index-Dd3Uox5p.js",
+    "name": "index",
+    "src": "virtual:vinext-app-browser-entry",
+    "isEntry": true,
+    "imports": [
+      "_rolldown-runtime-S-ySWqyJ.js",
+      "_framework-CXnKph_e.js"
+    ],
+    "dynamicImports": [
+      "node_modules/vinext/dist/shims/layout-segment-context.js",
+      "components/NewsExplorer.tsx",
+      "components/SiteHeader.tsx",
+      "components/CookieNotice.tsx",
+      "virtual:vinext-app-browser-entry",
+      "components/GuideExplorer.tsx",
+      "components/AIInfluencerCatalog.tsx",
+      "components/Analytics.tsx",
+      "app/error.tsx",
+      "components/BusinessLeadForm.tsx",
+      "_link-C-LrRkcr.js",
+      "components/SubscribeForm.tsx",
+      "components/EditorialHome.tsx",
+      "components/ConfigurationCalculator.tsx",
+      "components/VpnPilotForm.tsx"
+    ]
+  }
+}

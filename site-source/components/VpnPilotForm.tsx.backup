@@ -1,0 +1,83 @@
+"use client";
+
+import { FormEvent, useState } from "react";
+import { useFormStartedAt } from "./useFormStartedAt";
+
+export function VpnPilotForm() {
+  const [state, setState] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+  const { getStartedAt, restart } = useFormStartedAt();
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setState("sending");
+    setMessage("");
+    const form = event.currentTarget;
+    const payload = Object.fromEntries(new FormData(form));
+
+    try {
+      const response = await fetch("/api/vpn-pilot", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...payload, startedAt: getStartedAt() }),
+      });
+      const result = (await response.json()) as { message?: string };
+      if (!response.ok) throw new Error(result.message || "Не удалось отправить заявку.");
+      setState("success");
+      setMessage("Заявка принята. Сообщим о формировании пилотной группы.");
+      form.reset();
+      restart();
+    } catch (error) {
+      setState("error");
+      setMessage(error instanceof Error ? error.message : "Попробуйте ещё раз.");
+    }
+  }
+
+  return (
+    <form className="vpn-pilot-form" onSubmit={submit}>
+      <div>
+        <span>Ранний доступ</span>
+        <h2>Вступить в пилотную группу</h2>
+      </div>
+      <label>
+        <span>Имя *</span>
+        <input name="name" maxLength={80} required />
+      </label>
+      <label>
+        <span>Telegram *</span>
+        <input name="telegram" maxLength={100} placeholder="@username" required />
+      </label>
+      <label>
+        <span>Email *</span>
+        <input name="email" type="email" maxLength={160} required />
+      </label>
+      <label>
+        <span>Тип клиента *</span>
+        <select name="clientType" defaultValue="" required>
+          <option value="" disabled>Выберите вариант</option>
+          <option value="private">Частный клиент</option>
+          <option value="business">Корпоративный клиент</option>
+        </select>
+      </label>
+      <label>
+        <span>Количество устройств *</span>
+        <input name="devices" type="number" min={1} max={10000} required />
+      </label>
+      <label className="honeypot" aria-hidden="true">
+        <span>Должность</span>
+        <input name="position" tabIndex={-1} autoComplete="off" />
+      </label>
+      <label className="consent-check">
+        <input name="consent" type="checkbox" required />
+        <span>Согласен с <a href="/privacy">политикой конфиденциальности</a></span>
+      </label>
+      <button className="button button-primary" type="submit" disabled={state === "sending"}>
+        {state === "sending" ? "Отправляем…" : "Получить ранний доступ"}
+      </button>
+      {message && <p className={`form-message ${state}`} role="status">{message}</p>}
+      <small>
+        Заявка не является покупкой или оформлением действующей подписки.
+      </small>
+    </form>
+  );
+}

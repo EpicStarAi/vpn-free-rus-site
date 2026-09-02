@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1785432077307,
+      "tag": "0000_material_inhumans",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1785432836620,
+      "tag": "0001_premium_emma_frost",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1785434282517,
+      "tag": "0002_magenta_hiroim",
+      "breakpoints": true
+    }
+  ]
+}
