@@ -3,19 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { siteConfig } from "@/data/site";
 import { Logo } from "./Logo";
 
+const TRIAL = "https://t.me/FREE_RUS_VPN_BOT?start=trial";
+
 const navigation = [
-  ["Услуги", "/#services"],
-  ["Наташа", "/natasha"],
-  ["Соцсети", "/social-media"],
-  ["AI-агенты", "/ai-agents"],
   ["VPN FREE RUS", "/epic-vpn"],
-  ["Кейсы", "/cases"],
-  ["Тарифы", "/pricing"],
-  ["Медиа", "/blog"],
-  ["О компании", "/about"],
+  ["Тарифы", "/epic-vpn#plans"],
+  ["Наташа", "/natasha"],
+  ["AI-агенты", "/ai-agents"],
+  ["Услуги", "/sales"],
+  ["О проекте", "/about"],
 ] as const;
 
 export function SiteHeader() {
@@ -28,9 +26,11 @@ export function SiteHeader() {
         <Logo />
         <nav className={open ? "main-nav is-open" : "main-nav"} aria-label="Основная навигация">
           {navigation.map(([label, href]) => {
-            const active = href === "/#services"
-              ? pathname === "/"
-              : pathname === href || pathname.startsWith(`${href}/`);
+            const pathOnly = href.split("#")[0];
+            const active =
+              pathOnly === "/"
+                ? pathname === "/"
+                : pathname === pathOnly || pathname.startsWith(`${pathOnly}/`);
 
             return (
               <Link
@@ -44,8 +44,8 @@ export function SiteHeader() {
             );
           })}
         </nav>
-        <a className="header-telegram" href={siteConfig.social.telegram}>
-          <span aria-hidden="true">↗</span> Telegram
+        <a className="header-telegram" href={TRIAL}>
+          <span aria-hidden="true">↗</span> Тест VPN
         </a>
         <button
           className={open ? "menu-toggle is-open" : "menu-toggle"}

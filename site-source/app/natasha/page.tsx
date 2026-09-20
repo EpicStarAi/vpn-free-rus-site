@@ -1,12 +1,21 @@
-import type { Metadata } from "next";
-import { EditorialHome } from "@/components/EditorialHome";
+import { VpnAdPage, vpnAdMetadata } from "@/components/VpnAdPage";
 
-export const metadata: Metadata = {
-  title: "Наташа Фри RUS",
-  description:
-    "Редакционный кабинет Наташи Фри RUS: новости, первоисточники, авторская аналитика и спокойные разборы.",
-};
+export const metadata = vpnAdMetadata(
+  "Наташа Фри RUS",
+  "Редакционный раздел сохранён как короткий переход. Главный продукт FreeRUS — VPN FREE RUS.",
+);
 
-export default function NatashaPage() {
-  return <EditorialHome />;
+export default function Page() {
+  return (
+    <VpnAdPage
+      eyebrow="Медиа · переход"
+      title="Наташа Фри RUS"
+      text="Редакционный раздел сохранён как короткий переход. Главный продукт FreeRUS — VPN FREE RUS."
+      points={[
+    "Новости и разборы",
+    "Короткий вход в экосистему",
+    "Дальше — к VPN"
+      ]}
+    />
+  );
 }
