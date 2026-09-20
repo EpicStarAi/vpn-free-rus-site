@@ -4,7 +4,7 @@ export const siteConfig = {
   url: "https://freerus.site",
   email: "internetbezogranicheniy@gmail.com",
   social: {
-    telegram: "https://t.me/",
+    telegram: "https://t.me/FREE_RUS_VPN_BOT",
     youtube: "https://youtube.com/",
     tiktok: "https://tiktok.com/",
     instagram: "https://instagram.com/",

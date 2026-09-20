@@ -1,27 +1,14 @@
-import type { Metadata } from "next";
-import { NewsExplorer } from "@/components/NewsExplorer";
-import { posts } from "@/data/site";
+import { VpnAdPage, vpnAdMetadata } from "@/components/VpnAdPage";
 
-export const metadata: Metadata = {
-  title: "Новости и разборы",
-  description:
-    "Проверенные материалы о цифровой безопасности, технологиях, социальных сетях, VPN и приватности.",
-};
+export const metadata = vpnAdMetadata("Новости", "Лента новостей сведена к короткому переходу. Для доступа в сеть — VPN FREE RUS.");
 
-export default function NewsPage() {
+export default function Page() {
   return (
-    <main id="main" className="inner-page">
-      <section className="page-hero section-shell">
-        <span className="eyebrow">Редакционная лента</span>
-        <h1>Новости и разборы</h1>
-        <p>
-          Без выдуманных сенсаций: объясняем, что произошло, как это работает и
-          что действительно стоит сделать.
-        </p>
-      </section>
-      <section className="section-shell listing-section">
-        <NewsExplorer initialPosts={posts} />
-      </section>
-    </main>
+    <VpnAdPage
+      eyebrow="Новости · переход"
+      title="Новости"
+      text="Лента новостей сведена к короткому переходу. Для доступа в сеть — VPN FREE RUS."
+      points={["Короткий переход", "CTA на VPN FREE RUS"]}
+    />
   );
 }

@@ -2,37 +2,36 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "FreeRUS — медиа, AI-агенты и цифровые продукты",
+  title: "VPN FREE RUS — интернет без ограничений",
   description:
-    "Главная витрина FreeRUS: редакционный проект Наташа Фри RUS, AI-агенты для бизнеса, цифровизация, соцмедиа и партнёрский VPN.",
+    "VPN FREE RUS: 3 дня бесплатно, AmneziaWG-конфиг, оплата в Telegram Stars. Быстрый старт через бота.",
 };
 
-const ecosystemCards = [
+const highlights = [
+  ["01", "3 дня бесплатно", "Один тест на Telegram-аккаунт — без карты на сайте."],
+  ["02", "AmneziaWG", "Персональный конфиг для телефона и ПК."],
+  ["03", "Telegram Stars", "Оплата и выдача доступа прямо в боте."],
+] as const;
+
+const extras = [
   {
     href: "/natasha",
-    eyebrow: "Медиа / редакция",
     title: "Наташа Фри RUS",
-    text:
-      "Независимый редакционный кабинет: новости, первоисточники, авторские разборы и спокойная аналитика без лишнего шума.",
-    cta: "Открыть медиа",
-    points: ["Новости и источники", "Авторская колонка", "Закрытые разборы"],
+    text: "Редакционные материалы — как дополнительный вход к экосистеме.",
   },
   {
     href: "/ai-agents",
-    eyebrow: "Платформа / AI-агенты",
-    title: "AI-агенты для бизнеса",
-    text:
-      "Виртуальные сотрудники, approval-center, CRM, контент, соцмедиа и управляемая автоматизация с подтверждением владельца.",
-    cta: "Открыть платформу",
-    points: ["AI-аудит проекта", "Контент и CRM", "Ручное подтверждение"],
+    title: "AI-агенты",
+    text: "Короткий обзор платформы. Основной продукт — VPN.",
+  },
+  {
+    href: "/sales",
+    title: "Digital-услуги",
+    text: "Продажи, маркетинг и соцсети — как рекламные переходы.",
   },
 ] as const;
 
-const supportCards = [
-  ["Digital-контур", "Продажи, маркетинг, соцсети и автоматизация процессов."],
-  ["VPN-партнёр", "Отдельный VPN-проект как спонсорский и инфраструктурный слой."],
-  ["Простые действия", "Ссылка на сайт или соцсеть → кабинет → проверка → AI-разбор."],
-] as const;
+const TRIAL = "https://t.me/FREE_RUS_VPN_BOT?start=trial";
 
 export default function HomePage() {
   return (
@@ -41,76 +40,71 @@ export default function HomePage() {
         <div className="section-shell freerus-hub-hero-grid">
           <div className="freerus-hub-copy">
             <span className="corp-powered">Powered by EPIC☠VPN AI</span>
-            <span className="eyebrow eyebrow-light">FreeRUS ecosystem</span>
+            <span className="eyebrow eyebrow-light">VPN FREE RUS</span>
             <h1>
-              <span>Медиа</span>
-              <span>AI-агенты</span>
-              <span>цифровой кабинет</span>
+              <span>Интернет</span>
+              <span>без ограничений</span>
+              <span>за 2 минуты</span>
             </h1>
             <p>
-              FreeRUS теперь работает как единая витрина: с одной стороны —
-              редакционный голос Наташи Фри, с другой — агентская платформа для
-              бизнеса, соцмедиа, аналитики и автоматизации.
+              Основной продукт FreeRUS — VPN FREE RUS. Тест на 3 дня, дальше
+              понятные тарифы. Конфиг приходит в Telegram после оформления.
             </p>
             <div className="freerus-hub-actions">
-              <Link className="button button-primary" href="/natasha">
-                Наташа Фри RUS
-              </Link>
-              <Link className="button button-ghost" href="/ai-agents">
-                AI-агенты
+              <a className="button button-primary" href={TRIAL}>
+                Получить тест 3 дня
+              </a>
+              <Link className="button button-ghost" href="/epic-vpn">
+                Смотреть тарифы
               </Link>
             </div>
           </div>
 
-          <aside className="freerus-hub-status" aria-label="Структура проекта">
-            <span>01 / вход</span>
-            <strong>Клиент выбирает сценарий</strong>
+          <aside className="freerus-hub-status" aria-label="Статус VPN">
+            <span>01 / старт</span>
+            <strong>Сервис работает</strong>
             <p>
-              Читать медиа, заказать AI-разбор, подключить соцмедиа-контур или
-              перейти к партнёрскому VPN.
+              Выберите тест или тариф → оплатите в боте Stars → получите
+              AmneziaWG-конфиг.
             </p>
             <div>
-              <small>Главная</small>
-              <small>Медиа</small>
-              <small>Платформа</small>
-              <small>VPN</small>
+              <small>0 ₽ · 3 дня</small>
+              <small>149 ₽ · месяц</small>
+              <small>1 490 ₽ · год</small>
             </div>
           </aside>
         </div>
       </section>
 
-      <section className="section-shell freerus-ecosystem-section" aria-labelledby="ecosystem-title">
+      <section className="section-shell freerus-ecosystem-section" aria-labelledby="why-vpn">
         <div className="corp-section-title">
-          <span className="eyebrow">Два основных входа</span>
-          <h2 id="ecosystem-title">Выберите, с чего начать</h2>
-          <p>
-            Главная не подменяет продукты. Она разводит посетителя по понятным
-            сценариям: редакция Наташи или рабочая AI-платформа.
-          </p>
+          <span className="eyebrow">Почему VPN FREE RUS</span>
+          <h2 id="why-vpn">Коротко о подключении</h2>
+          <p>Без лишней витрины: доступ, конфиг и поддержка в Telegram.</p>
         </div>
-
         <div className="freerus-ecosystem-grid">
-          {ecosystemCards.map((card) => (
-            <Link className="freerus-ecosystem-card" href={card.href} key={card.href}>
-              <span>{card.eyebrow}</span>
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
-              <ul>
-                {card.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-              <strong>{card.cta} →</strong>
-            </Link>
+          {highlights.map(([num, title, text]) => (
+            <article className="freerus-ecosystem-card" key={title}>
+              <span>{num}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
           ))}
+        </div>
+        <div className="freerus-hub-actions" style={{ marginTop: "1.5rem" }}>
+          <Link className="button button-primary" href="/epic-vpn#checkout">
+            Оформить доступ
+          </Link>
         </div>
       </section>
 
-      <section className="section-shell freerus-support-section" aria-label="Дополнительные направления">
-        {supportCards.map(([title, text]) => (
-          <article key={title}>
-            <span>{title}</span>
-            <p>{text}</p>
+      <section className="section-shell freerus-support-section" aria-label="Другие разделы">
+        {extras.map((item) => (
+          <article key={item.href}>
+            <span>
+              <Link href={item.href}>{item.title}</Link>
+            </span>
+            <p>{item.text}</p>
           </article>
         ))}
       </section>
