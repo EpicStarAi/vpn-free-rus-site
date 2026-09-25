@@ -1,1 +1,17 @@
-{"name":"FREE RUS VPN","short_name":"FREE RUS VPN","start_url":"./","display":"standalone","background_color":"#05070a","theme_color":"#05070a","description":"Простой доступ к защищённому интернету с FREE RUS VPN."}
+{
+  "name": "FREE RUS VPN",
+  "short_name": "FREE RUS VPN",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#05070a",
+  "theme_color": "#05070a",
+  "description": "Простой доступ к защищённому интернету с FREE RUS VPN.",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
