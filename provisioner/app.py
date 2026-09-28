@@ -4,6 +4,7 @@
 Run only on the VPN host as root. It never stores client private keys:
 a generated config is returned once to the caller over authenticated localhost HTTP.
 """
+from contextlib import closing
 import datetime as dt
 import fcntl
 import hmac
@@ -37,14 +38,32 @@ def command(*args, input_text=None):
     return result.stdout.strip()
 
 def db():
+    return sqlite3.connect(DATABASE, timeout=15)
+
+
+def initialize_database():
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    con = sqlite3.connect(DATABASE)
-    con.execute("""CREATE TABLE IF NOT EXISTS clients (
+    definition = """CREATE TABLE IF NOT EXISTS clients (
       client_id TEXT PRIMARY KEY, label TEXT NOT NULL, telegram_id TEXT,
-      address TEXT NOT NULL UNIQUE, public_key TEXT NOT NULL UNIQUE,
+      address TEXT NOT NULL, public_key TEXT NOT NULL UNIQUE,
       created_at TEXT NOT NULL, expires_at TEXT NOT NULL, revoked_at TEXT
-    )""")
-    return con
+    )"""
+    with closing(db()) as con, con:
+        con.execute("BEGIN IMMEDIATE")
+        con.execute(definition)
+        # Historic addresses may be reused after revocation, but active ones must be unique.
+        legacy = False
+        for index in con.execute("PRAGMA index_list(clients)").fetchall():
+            if index[2] and not index[4]:
+                columns = [row[2] for row in con.execute('PRAGMA index_info("' + index[1].replace('"', '""') + '")')]
+                legacy = legacy or columns == ["address"]
+        if legacy:
+            con.execute("ALTER TABLE clients RENAME TO clients_legacy")
+            con.execute(definition)
+            con.execute("INSERT INTO clients SELECT * FROM clients_legacy")
+            con.execute("DROP TABLE clients_legacy")
+        con.execute("CREATE UNIQUE INDEX IF NOT EXISTS clients_active_address ON clients(address) WHERE revoked_at IS NULL")
+
 
 def awg_config_values():
     values = {}
@@ -66,16 +85,29 @@ def awg_config_values():
 def used_addresses():
     used = set()
     output = command("awg", "show", INTERFACE, "allowed-ips")
-    for token in re.findall(r"\b10\.8\.0\.\d+/\d+\b", output):
-        used.add(ipaddress.ip_interface(token).ip)
+    for line in output.splitlines():
+        fields = line.split(maxsplit=1)
+        if len(fields) != 2:
+            continue
+        for token in fields[1].replace(",", " ").split():
+            try:
+                network = ipaddress.ip_network(token, strict=False)
+                if network.version == POOL.version:
+                    used.update(ip for ip in POOL.hosts() if ip in network)
+            except ValueError:
+                continue
+    with closing(db()) as con:
+        used.update(ipaddress.ip_address(row[0]) for row in con.execute("SELECT address FROM clients WHERE revoked_at IS NULL"))
     return used
+
 
 def next_address():
     used = used_addresses()
-    for ip in list(POOL.hosts())[9:]:  # reserve .1-.9 for infrastructure/manual clients
+    for ip in list(POOL.hosts())[9:]:
         if ip not in used:
             return ip
     raise RuntimeError("VPN address pool is exhausted")
+
 
 def client_config(private_key, psk, address):
     values = awg_config_values()
@@ -108,7 +140,18 @@ def remove_managed_block(client_id):
     lines = CONFIG.read_text().splitlines(keepends=True)
     start = next((i for i, line in enumerate(lines) if line.strip() == marker), None)
     if start is None: return
-    end = next((i for i in range(start + 1, len(lines)) if lines[i].strip().startswith("# free-rus:")), len(lines))
+    end = len(lines)
+    own_peer_seen = False
+    for i in range(start + 1, len(lines)):
+        value = lines[i].strip()
+        if value == "[Peer]":
+            if own_peer_seen:
+                end = i
+                break
+            own_peer_seen = True
+        elif own_peer_seen and value.startswith("#"):
+            end = i
+            break
     fd, tmp = tempfile.mkstemp(dir=str(CONFIG.parent), prefix=".awg0.", text=True)
     with os.fdopen(fd, "w") as out:
         out.writelines(lines[:start] + lines[end:])
@@ -130,33 +173,40 @@ def provision(body):
     address = next_address()
     created = dt.datetime.now(dt.timezone.utc)
     expires = created + dt.timedelta(days=ttl)
-    append_peer(client_id, public, psk, address)
+    config = client_config(private, psk, address)
+    peer_attempted = False
     try:
-        con = db()
-        con.execute("INSERT INTO clients VALUES (?,?,?,?,?,?,?,NULL)", (client_id,label,telegram_id,str(address),public,created.isoformat(),expires.isoformat()))
-        con.commit(); con.close()
+        with closing(db()) as con, con:
+            con.execute("INSERT INTO clients VALUES (?,?,?,?,?,?,?,NULL)", (client_id,label,telegram_id,str(address),public,created.isoformat(),expires.isoformat()))
+            peer_attempted = True
+            append_peer(client_id, public, psk, address)
     except Exception:
-        command("awg", "set", INTERFACE, "peer", public, "remove")
-        remove_managed_block(client_id)
+        # The transaction is rolled back and the connection closed before cleanup.
+        if peer_attempted:
+            try:
+                command("awg", "set", INTERFACE, "peer", public, "remove")
+            finally:
+                remove_managed_block(client_id)
         raise
-    return {"client_id":client_id,"address":str(address),"expires_at":expires.isoformat(),"config":client_config(private, psk, address)}
+    return {"client_id":client_id,"address":str(address),"expires_at":expires.isoformat(),"config":config}
 
 def revoke(client_id):
-    con = db()
-    row = con.execute("SELECT public_key, revoked_at FROM clients WHERE client_id=?", (client_id,)).fetchone()
-    if not row: raise KeyError("client not found")
-    if row[1]: return {"client_id":client_id,"status":"already_revoked"}
-    command("awg", "set", INTERFACE, "peer", row[0], "remove")
-    remove_managed_block(client_id)
-    con.execute("UPDATE clients SET revoked_at=? WHERE client_id=?", (dt.datetime.now(dt.timezone.utc).isoformat(), client_id))
-    con.commit(); con.close()
+    with closing(db()) as con, con:
+        row = con.execute("SELECT public_key, revoked_at FROM clients WHERE client_id=?", (client_id,)).fetchone()
+        if not row:
+            raise KeyError("client not found")
+        if row[1]:
+            return {"client_id":client_id,"status":"already_revoked"}
+        command("awg", "set", INTERFACE, "peer", row[0], "remove")
+        remove_managed_block(client_id)
+        con.execute("UPDATE clients SET revoked_at=? WHERE client_id=?", (dt.datetime.now(dt.timezone.utc).isoformat(), client_id))
     return {"client_id":client_id,"status":"revoked"}
+
 
 def expire():
     now = dt.datetime.now(dt.timezone.utc).isoformat()
-    con = db()
-    ids = [r[0] for r in con.execute("SELECT client_id FROM clients WHERE revoked_at IS NULL AND expires_at <= ?", (now,))]
-    con.close()
+    with closing(db()) as con:
+        ids = [r[0] for r in con.execute("SELECT client_id FROM clients WHERE revoked_at IS NULL AND expires_at <= ?", (now,))]
     return {"revoked":[revoke(x)["client_id"] for x in ids]}
 
 class Handler(BaseHTTPRequestHandler):
@@ -188,4 +238,7 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     DATA_DIR.mkdir(parents=True, exist_ok=True)
+    with LOCK.open("a+") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        initialize_database()
     ThreadingHTTPServer((BIND, PORT), Handler).serve_forever()
