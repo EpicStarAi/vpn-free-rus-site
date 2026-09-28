@@ -98,7 +98,7 @@ def deliver_config(chat,user,client_id):
         con.execute('UPDATE deliveries SET file_id=?,state=? WHERE client_id=?',(file_id,'delivered',client_id))
         con.execute('UPDATE orders SET status=? WHERE client_id=?',('delivered',client_id))
     pending_path(client_id).unlink(missing_ok=True)
-    return message(chat,f"✅ Конфигурация отправлена. Доступ до {format_date(row[0])}.\n\nСохраните файл и импортируйте его в приложение, поддерживающее AmneziaWG. Затем включите подключение. Повторно получить файл: /access",[[{'text':'Приложения и инструкция','url':'https://freerus.site/#download'},{'text':'Поддержка','callback_data':'support'}]])
+    return message(chat,f"✅ Конфигурация отправлена. Доступ до {format_date(row[0])}.\n\n1. Установите FREE RUS VPN для Android или Windows по ссылке ниже.\n2. Сохраните отправленный файл .conf.\n3. Откройте приложение, нажмите «+» и выберите импорт из файла.\n4. Выберите .conf и включите VPN.\n\nПовторно получить файл: /access. Не пересылайте конфигурацию другим людям.",[[{'text':'Приложения и инструкция','url':'https://freerus.site/#download'},{'text':'Поддержка','callback_data':'support'}]])
 
 
 def retry_delivery(chat,user):
