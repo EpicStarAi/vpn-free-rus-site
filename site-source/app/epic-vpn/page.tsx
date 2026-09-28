@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { VpnDownloads } from "@/components/VpnDownloads";
 import { JsonLd } from "@/components/JsonLd";
 import { VpnPilotForm } from "@/components/VpnPilotForm";
 import { corporateConfig } from "@/data/corporate";
@@ -34,7 +35,7 @@ export default function EpicVpnPage() {
             <p className="free-vpn-lead">Начните с 3 дней бесплатно. Выберите тариф на сайте, а Telegram-бот оформит доступ и пришлёт персональный конфиг.</p>
             <div className="free-vpn-actions">
               <a className="free-vpn-primary" href="#checkout">Получить тест 3 дня</a>
-              <a className="free-vpn-secondary" href="#plans">Посмотреть тарифы</a>
+              <a className="free-vpn-secondary" href="#download">Скачать приложение</a>
             </div>
             <div className="free-vpn-trust"><span>3 дня без оплаты</span><span>Несколько устройств</span><span>Поддержка в Telegram</span></div>
           </div>
@@ -45,6 +46,8 @@ export default function EpicVpnPage() {
           </div>
         </div>
       </section>
+
+      <VpnDownloads />
 
       <section className="free-vpn-strip"><div className="free-vpn-shell free-vpn-benefits">
         {benefits.map(([number, title, text]) => <article key={title}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}

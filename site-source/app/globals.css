@@ -7583,3 +7583,27 @@ a {
     font-size: 38px;
   }
 }
+
+/* Installer downloads shared by the home and VPN pages. */
+.vpn-downloads { padding-block: clamp(36px, 6vw, 80px); scroll-margin-top: 100px; }
+.vpn-download-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 28px; }
+.vpn-download-card { min-width: 0; padding: clamp(22px, 3vw, 36px); border: 1px solid #3b4248; border-radius: 16px; background: #111820; color: #f4f7f9; }
+.vpn-download-card-top { display: flex; justify-content: space-between; gap: 16px; color: #adbac7; font: 600 12px/1.5 sans-serif; letter-spacing: .08em; }
+.vpn-download-card h3 { margin: 24px 0 12px; font-size: clamp(28px, 3vw, 40px); }
+.vpn-download-card > p { color: #adbac7; line-height: 1.7; min-height: 3.4em; }
+.vpn-download-button { display: flex; justify-content: space-between; width: 100%; min-height: 52px; margin: 24px 0 14px; gap: 12px; white-space: normal; text-align: left; }
+.vpn-download-card small { display: block; overflow-wrap: anywhere; color: #adbac7; font-size: 12px; }
+.vpn-downloads details { padding-block: 20px; border-top: 1px solid #3b4248; margin-top: 22px; }
+.vpn-downloads summary { cursor: pointer; font-size: 15px; line-height: 1.5; }
+.vpn-downloads details p { color: #adbac7; line-height: 1.7; font-size: 14px; margin-top: 16px; overflow-wrap: anywhere; }
+.vpn-downloads details a { text-decoration: underline; }
+.vpn-download-next { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 24px; }
+.vpn-download-next h3 { font-size: 20px; margin-bottom: 8px; }
+.vpn-download-next p { color: #adbac7; line-height: 1.6; }
+.vpn-downloads :is(a, summary):focus-visible { outline: 3px solid #c8f36a; outline-offset: 5px; }
+@media (max-width: 700px) {
+  .vpn-download-grid { grid-template-columns: 1fr; gap: 16px; }
+  .vpn-download-next { align-items: stretch; flex-direction: column; }
+  .vpn-download-next .button { text-align: center; }
+  .vpn-download-card > p { min-height: 0; }
+}

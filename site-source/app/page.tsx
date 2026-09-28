@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { VpnDownloads } from "@/components/VpnDownloads";
 
 export const metadata: Metadata = {
-  title: "VPN FREE RUS — интернет без ограничений",
+  title: "FREE RUS VPN — приложения для Android и Windows",
   description:
-    "VPN FREE RUS: 3 дня бесплатно, AmneziaWG-конфиг, оплата в Telegram Stars. Быстрый старт через бота.",
+    "Скачайте FREE RUS VPN для Android и Windows. Установщики, инструкции и оформление доступа через Telegram.",
 };
 
 const highlights = [
@@ -44,19 +45,19 @@ export default function HomePage() {
             <h1>
               <span>Интернет</span>
               <span>без ограничений</span>
-              <span>за 2 минуты</span>
+              <span>на ваших устройствах</span>
             </h1>
             <p>
-              Основной продукт FreeRUS — VPN FREE RUS. Тест на 3 дня, дальше
-              понятные тарифы. Конфиг приходит в Telegram после оформления.
+              FREE RUS VPN для Android и Windows. Скачайте приложение,
+              затем получите доступ и инструкцию по подключению в Telegram.
             </p>
             <div className="freerus-hub-actions">
-              <a className="button button-primary" href={TRIAL}>
+              <a className="button button-primary" href="#download">
+                Скачать приложение
+              </a>
+              <a className="button button-ghost" href={TRIAL}>
                 Получить тест 3 дня
               </a>
-              <Link className="button button-ghost" href="/epic-vpn">
-                Смотреть тарифы
-              </Link>
             </div>
           </div>
 
@@ -75,6 +76,8 @@ export default function HomePage() {
           </aside>
         </div>
       </section>
+
+      <VpnDownloads />
 
       <section className="section-shell freerus-ecosystem-section" aria-labelledby="why-vpn">
         <div className="corp-section-title">

@@ -10,6 +10,7 @@ const TRIAL = "https://t.me/FREE_RUS_VPN_BOT?start=trial";
 const navigation = [
   ["VPN FREE RUS", "/epic-vpn"],
   ["Тарифы", "/epic-vpn#plans"],
+  ["Скачать", "/#download"],
   ["Наташа", "/natasha"],
   ["AI-агенты", "/ai-agents"],
   ["Услуги", "/sales"],

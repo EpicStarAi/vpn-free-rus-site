@@ -39,30 +39,16 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: base,
     title: {
-      default: "Интернет без ограничений RUS",
-      template: "%s — Интернет без ограничений RUS",
+      default: "FREE RUS VPN",
+      template: "%s — FREE RUS VPN",
     },
     description:
-      "Digital-агентство и технологический центр в Москве: удалённый отдел продаж и маркетинга, ведение социальных сетей, CRM, AI-агенты и автоматизация бизнеса.",
-    applicationName: "Интернет без ограничений RUS",
+      "FREE RUS VPN: приложения для Android и Windows, инструкции по установке и доступ через Telegram.",
+    applicationName: "FREE RUS VPN",
     alternates: {
       canonical: siteConfig.url,
     },
-    keywords: [
-      "digital-агентство Москва",
-      "удалённый отдел маркетинга",
-      "удалённый отдел продаж",
-      "ведение социальных сетей Москва",
-      "автоматизация бизнеса",
-      "внедрение AI в бизнес",
-      "настройка CRM",
-      "AI-агенты для бизнеса",
-      "создание Telegram-ботов",
-      "digital-трансформация бизнеса",
-      "контент для социальных сетей",
-      "корпоративный VPN",
-      "защищённая удалённая работа",
-    ],
+    keywords: ["FREE RUS VPN", "VPN Android", "VPN Windows", "скачать APK", "VPN для компьютера"],
     authors: [{ name: corporateConfig.brand }],
     icons: {
       icon: "/favicon.png",
@@ -70,10 +56,10 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: "website",
       locale: "ru_RU",
-      siteName: "Интернет без ограничений RUS",
-      title: "Интернет без ограничений RUS",
+      siteName: "FREE RUS VPN",
+      title: "FREE RUS VPN — Android и Windows",
       description:
-        "Ваш удалённый отдел продаж, маркетинга и цифровизации в Москве и по всей России.",
+        "Приложения FREE RUS VPN для телефона и компьютера. Загрузка и подключение через Telegram.",
       images: [
         {
           url: new URL("/og.png", base).toString(),
@@ -85,8 +71,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Интернет без ограничений RUS",
-      description: "Продажи, маркетинг и AI в одном рабочем контуре.",
+      title: "FREE RUS VPN — Android и Windows",
+      description: "Скачайте FREE RUS VPN для Android и Windows.",
       images: [new URL("/og.png", base).toString()],
     },
   };
