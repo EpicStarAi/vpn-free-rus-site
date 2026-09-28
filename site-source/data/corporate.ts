@@ -1,7 +1,7 @@
 import { siteConfig } from "./site";
 
 export const corporateConfig = {
-  brand: "ИНТЕРНЕТ БЕЗ ОГРАНИЧЕНИЙ RUS",
+  brand: "FREE RUS VPN",
   poweredBy: "Powered by EPIC☠️VPN AI",
   city: "Москва",
   geography: "Работаем удалённо с клиентами по всей России.",

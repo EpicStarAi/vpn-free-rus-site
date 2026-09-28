@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { VpnDownloads } from "@/components/VpnDownloads";
 
 export const metadata: Metadata = {
-  title: { absolute: "VPN FREE RUS — VPN для Android и Windows" },
-  description: "Попробуйте VPN FREE RUS 3 дня бесплатно. Первый месяц — 99 Stars. Приложения для Android и Windows, оформление через Telegram.",
+  title: { absolute: "FREE RUS VPN — VPN для Android и Windows" },
+  description: "Попробуйте FREE RUS VPN 3 дня бесплатно. Первый месяц — 99 Stars. Приложения для Android и Windows, оформление через Telegram.",
 };
 
 const bot = "https://t.me/FREE_RUS_VPN_BOT";
@@ -18,7 +18,7 @@ export default function HomePage() {
     <main id="main" className="vpn-sales">
       <section className="vpn-sales-hero section-shell">
         <div>
-          <p className="vpn-sales-label">VPN FREE RUS · Android и Windows</p>
+          <p className="vpn-sales-label">FREE RUS VPN · Android и Windows</p>
           <h1>VPN для телефона<br />и компьютера</h1>
           <p className="vpn-sales-lead">Скачайте приложение и подключитесь по инструкции в Telegram. Начните с бесплатного теста — выберите тариф, когда проверите сервис.</p>
           <div className="vpn-sales-actions">

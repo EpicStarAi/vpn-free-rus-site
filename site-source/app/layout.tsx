@@ -65,7 +65,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: new URL("/og.png", base).toString(),
           width: 1200,
           height: 630,
-          alt: "Интернет без ограничений RUS",
+          alt: "FREE RUS VPN",
         },
       ],
     },
