@@ -3,14 +3,14 @@ import { VpnDownloads } from "@/components/VpnDownloads";
 
 export const metadata: Metadata = {
   title: { absolute: "VPN FREE RUS — VPN для Android и Windows" },
-  description: "Попробуйте VPN FREE RUS 3 дня бесплатно. Первый месяц — 149 ₽. Приложения для Android и Windows, оформление через Telegram.",
+  description: "Попробуйте VPN FREE RUS 3 дня бесплатно. Первый месяц — 99 Stars. Приложения для Android и Windows, оформление через Telegram.",
 };
 
 const bot = "https://t.me/FREE_RUS_VPN_BOT";
 const plans = [
   { name: "Попробовать", price: "0 ₽", period: "на 3 дня", note: "Один тест на Telegram-аккаунт.", action: "Попробовать бесплатно", start: "trial" },
-  { name: "На месяц", price: "149 ₽", period: "за первый месяц", note: "Далее — 249 ₽ в месяц.", action: "Подключить на месяц", start: "buy_month" },
-  { name: "На год", price: "1 490 ₽", period: "за 12 месяцев", note: "Для длительного доступа к VPN.", action: "Подключить на год", start: "buy_year" },
+  { name: "На месяц", price: "99 Stars", period: "за первый месяц", note: "Далее — 199 Stars в месяц.", action: "Подключить на месяц", start: "buy_month" },
+  { name: "На год", price: "1 199 Stars", period: "за 12 месяцев", note: "Для длительного доступа к VPN.", action: "Подключить на год", start: "buy_year" },
 ] as const;
 
 export default function HomePage() {
@@ -25,7 +25,7 @@ export default function HomePage() {
             <a className="button button-primary" href={`${bot}?start=trial`}>Попробовать 3 дня бесплатно</a>
             <a className="button button-ghost" href="#plans">Выбрать тариф</a>
           </div>
-          <p className="vpn-sales-caption">Первый месяц — 149 ₽. Далее — 249 ₽/месяц.</p>
+          <p className="vpn-sales-caption">Первый месяц — 99 Stars. Далее — 199 Stars/месяц.</p>
         </div>
         <aside className="vpn-sales-start" aria-label="Бесплатный тест VPN">
           <span>Начните с теста</span>
@@ -50,9 +50,9 @@ export default function HomePage() {
       <section className="vpn-sales-section section-shell" id="connect" aria-labelledby="connect-title">
         <div className="vpn-sales-heading"><h2 id="connect-title">Как подключиться</h2></div>
         <ol className="vpn-sales-steps">
-          <li><span>1</span><h3>Получите доступ</h3><p>Выберите бесплатный тест или тариф. Бот поможет оформить подключение.</p></li>
+          <li><span>1</span><h3>Получите доступ</h3><p>Откройте бота и нажмите «Запустить». Выберите тест или тариф — бот пришлёт персональный файл .conf.</p></li>
           <li><span>2</span><h3>Установите приложение</h3><p>Скачайте версию для Android или Windows по ссылкам ниже.</p></li>
-          <li><span>3</span><h3>Включите VPN</h3><p>Завершите настройку по инструкции, которую получите в Telegram.</p></li>
+          <li><span>3</span><h3>Включите VPN</h3><p>Сохраните файл из бота. В приложении нажмите «+», выберите импорт из файла, укажите .conf и включите подключение.</p></li>
         </ol>
       </section>
 
@@ -64,7 +64,8 @@ export default function HomePage() {
           <details><summary>Можно сначала попробовать бесплатно?</summary><p>Да. Тестовый доступ на 3 дня доступен один раз на Telegram-аккаунт. Нажмите «Попробовать 3 дня бесплатно» и следуйте подсказкам бота.</p></details>
           <details><summary>Как оплатить VPN?</summary><p>Выберите тариф. Откроется Telegram-бот, который покажет сумму в Stars и условия доступа до оплаты. Платёжные данные на этом сайте вводить не нужно.</p></details>
           <details><summary>На каких устройствах работает приложение?</summary><p>На странице доступны установщики для Android и Windows. Скачайте подходящий файл и завершите настройку по инструкции в боте.</p></details>
-          <details><summary>Скачал приложение. Что дальше?</summary><p>Само скачивание не оформляет доступ к VPN. Откройте бота, выберите тест или тариф и выполните инструкцию по подключению.</p></details>
+          <details><summary>Скачал приложение. Что дальше?</summary><p>Откройте бота и отправьте /trial для бесплатного теста. Сохраните полученный .conf, нажмите «+» в приложении и импортируйте файл. Если файл потерялся, отправьте боту /access.</p></details>
+          <details><summary>Почему бот не отвечает после перехода?</summary><p>Нажмите «Запустить» в чате бота. Если поверх чата открыто мини-приложение, закройте его и отправьте /trial. Для повторной отправки действующего файла используйте /access.</p></details>
           <details><summary>Куда написать, если не получается подключиться?</summary><p>Начните с инструкции в <a href={bot}>боте FREE RUS VPN</a>. Если вопрос остался, напишите на <a href="mailto:internetbezogranicheniy@gmail.com">internetbezogranicheniy@gmail.com</a>.</p></details>
         </div>
       </section>
