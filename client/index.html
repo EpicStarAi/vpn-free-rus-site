@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=3">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <title>FREE RUS VPN</title>
 </head>
@@ -25,7 +25,7 @@
     <section class="screen" id="top" aria-labelledby="title">
       <p class="eyebrow">ЗАЩИЩЁННОЕ ПОДКЛЮЧЕНИЕ</p>
       <h1 id="title">Интернет<br>под контролем.</h1>
-      <p class="intro">Оформите доступ в Telegram за минуту. После оплаты бот выдаст персональные данные для подключения.</p>
+      <p class="intro">Начните с теста на 3 дня. Доступ и персональную конфигурацию выдаёт бот в чате Telegram.</p>
 
       <section class="connection-card" aria-label="Статус доступа">
         <div class="status-dot"></div>
@@ -35,14 +35,17 @@
         </div>
       </section>
 
-      <a class="connect-button" data-bot-start="trial" href="https://t.me/FREE_RUS_VPN_BOT?start=trial">Получить доступ</a>
+      <a class="connect-button" data-bot-start="trial" href="https://t.me/FREE_RUS_VPN_BOT?start=trial">Получить тест на 3 дня</a>
       <a class="support-link" data-bot-start="access" href="https://t.me/FREE_RUS_VPN_BOT?start=access">У меня уже есть доступ</a>
+
+      <p class="handoff-status" data-handoff-status role="status" aria-live="polite" hidden></p>
+      <p class="download-note">После нажатия откроется чат бота. Если Telegram покажет «Запустить», нажмите эту кнопку.</p>
 
       <section class="download" aria-labelledby="apk-title">
         <p class="eyebrow">ANDROID</p>
         <h2 id="apk-title">Приложение для телефона</h2>
-        <p class="download-note">Установите FREE RUS VPN, откройте и нажмите «Подключиться». Конфиг сервера уже внутри.</p>
-        <a class="apk-button" href="https://freerus.online/apk/FREE-RUS-VPN.apk" download>Скачать Android APK</a>
+        <p class="download-note">Установите приложение, получите доступ в боте и выполните инструкцию по подключению.</p>
+        <a class="apk-button" href="https://github.com/EpicStarAi/vpn-free-rus-site/releases/download/v5.0.3.3/FREE-RUS-VPN.apk" download>Скачать Android APK</a>
       </section>
 
       <section class="how" aria-labelledby="how-title">
@@ -51,7 +54,7 @@
         <ol>
           <li><span>01</span><div><strong>Выберите тариф</strong><small>Тест 3 дня бесплатно или подписка</small></div></li>
           <li><span>02</span><div><strong>Оплатите Stars</strong><small>Оплата проходит внутри Telegram</small></div></li>
-          <li><span>03</span><div><strong>Подключитесь</strong><small>Бот выдаст доступ, Android-клиент уже готов</small></div></li>
+          <li><span>03</span><div><strong>Подключитесь</strong><small>Получите конфигурацию и инструкцию в чате</small></div></li>
         </ol>
       </section>
 
@@ -70,6 +73,6 @@
       </aside>
     </section>
   </main>
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
