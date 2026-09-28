@@ -2,15 +2,15 @@ import { VpnAdPage, vpnAdMetadata } from "@/components/VpnAdPage";
 
 export const metadata = vpnAdMetadata(
   "О проекте",
-  "FreeRUS — витрина вокруг VPN FREE RUS. Другие направления работают как переходы и анонсы.",
+  "FREE RUS VPN — приложения для Android и Windows. Скачайте установщик и получите доступ и инструкцию по подключению в Telegram.",
 );
 
 export default function Page() {
   return (
     <VpnAdPage
       eyebrow="О проекте"
-      title="FreeRUS · VPN в центре"
-      text="FreeRUS — витрина вокруг VPN FREE RUS. Другие направления работают как переходы и анонсы."
+      title="О FREE RUS VPN"
+      text="FREE RUS VPN — приложения для Android и Windows. Скачайте установщик и получите доступ и инструкцию по подключению в Telegram."
       points={[
     "VPN FREE RUS",
     "Telegram-бот",

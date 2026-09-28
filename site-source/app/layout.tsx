@@ -105,7 +105,7 @@ export default async function RootLayout({
             url: siteUrl,
             email: corporateConfig.email,
             description:
-              "Технологический и digital-центр: продажи, маркетинг, социальные сети, CRM, AI и автоматизация бизнеса.",
+              "FREE RUS VPN: приложения для Android и Windows, тарифы и помощь с подключением.",
             address: {
               "@type": "PostalAddress",
               addressLocality: "Москва",
@@ -118,7 +118,7 @@ export default async function RootLayout({
               email: corporateConfig.email,
               availableLanguage: "Russian",
             },
-            sameAs: Object.values(siteConfig.social),
+            sameAs: ["https://t.me/FREE_RUS_VPN_BOT"],
           }}
         />
         <a className="skip-link" href="#main">

@@ -8,13 +8,10 @@ import { Logo } from "./Logo";
 const TRIAL = "https://t.me/FREE_RUS_VPN_BOT?start=trial";
 
 const navigation = [
-  ["VPN FREE RUS", "/epic-vpn"],
-  ["Тарифы", "/epic-vpn#plans"],
+  ["Тарифы", "/#plans"],
+  ["Подключение", "/#connect"],
   ["Скачать", "/#download"],
-  ["Наташа", "/natasha"],
-  ["AI-агенты", "/ai-agents"],
-  ["Услуги", "/sales"],
-  ["О проекте", "/about"],
+  ["Вопросы", "/#faq"],
 ] as const;
 
 export function SiteHeader() {
@@ -28,10 +25,10 @@ export function SiteHeader() {
         <nav className={open ? "main-nav is-open" : "main-nav"} aria-label="Основная навигация">
           {navigation.map(([label, href]) => {
             const pathOnly = href.split("#")[0];
-            const active =
+            const active = !href.includes("#") && (
               pathOnly === "/"
                 ? pathname === "/"
-                : pathname === pathOnly || pathname.startsWith(`${pathOnly}/`);
+                : pathname === pathOnly || pathname.startsWith(`${pathOnly}/`));
 
             return (
               <Link

@@ -23,7 +23,6 @@ export function VpnAdPage({ eyebrow, title, text, points = [] }: VpnAdPageProps)
       <section className="freerus-hub-hero">
         <div className="section-shell freerus-hub-hero-grid">
           <div className="freerus-hub-copy">
-            <span className="corp-powered">Powered by EPIC☠VPN AI</span>
             <span className="eyebrow eyebrow-light">{eyebrow}</span>
             <h1>
               <span>{title}</span>
