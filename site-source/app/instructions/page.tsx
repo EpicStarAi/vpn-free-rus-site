@@ -8,7 +8,7 @@ export default function Page() {
       eyebrow="Инструкции · переход"
       title="Инструкции"
       text="Инструкции по VPN — на странице /epic-vpn и в Telegram-боте."
-      points={["Короткий переход", "CTA на VPN FREE RUS"]}
+      points={["Короткий переход", "CTA на FREE RUS VPN"]}
     />
   );
 }

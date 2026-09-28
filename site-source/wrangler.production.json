@@ -1,0 +1,38 @@
+{
+  "name": "freerus-site",
+  "account_id": "67aeac4d79d44d8d1f39367dd006e58b",
+  "main": "dist/server/index.js",
+  "compatibility_date": "2026-05-15",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "no_bundle": true,
+  "find_additional_modules": true,
+  "rules": [
+    {
+      "type": "ESModule",
+      "globs": [
+        "**/*.js",
+        "**/*.mjs"
+      ]
+    }
+  ],
+  "assets": {
+    "directory": "dist/client",
+    "binding": "ASSETS"
+  },
+  "keep_vars": true,
+  "routes": [
+    {
+      "pattern": "freerus.site/*",
+      "zone_id": "e982cebf1ff95c97671a8a9d577d6b1a"
+    },
+    {
+      "pattern": "www.freerus.site/*",
+      "zone_id": "e982cebf1ff95c97671a8a9d577d6b1a"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
