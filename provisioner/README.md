@@ -57,3 +57,15 @@ The API deliberately binds only to localhost, so **do not expose it publicly**. 
 5. Every hour call `POST /v1/maintenance/expire` to revoke expired trials.
 
 Before putting sales live, also restrict public RDP and the Docker-published database/Redis ports found in the audit.
+
+## Database migration and failure recovery
+
+On startup, the service migrates the legacy address-wide UNIQUE constraint to an active-address partial unique index. Historical revoked records remain available while their addresses can be reused. Allocation excludes both live interface peers (including manual clients) and active database reservations.
+
+Each database connection closes deterministically, failed writes roll back before peer cleanup, and configuration construction completes before registering a client. Removing a managed block preserves following manual peers. Startup migration runs under the provisioner lock.
+
+Before deploying, stop this service briefly, back up the code, SQLite database and AWG configuration to a root-only directory, then install and start the service. The AWG interface itself is not restarted. Verify health and database history. On a live system, never replace the database with an old backup after issuing new client access.
+
+```bash
+python3 -m unittest discover -s provisioner/tests -v
+```
