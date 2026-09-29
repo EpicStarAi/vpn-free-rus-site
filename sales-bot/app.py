@@ -12,7 +12,7 @@ TERMS_URL=os.getenv('FREE_RUS_TERMS_URL','https://freerus.site/terms')
 REFUNDS_URL=os.getenv('FREE_RUS_REFUNDS_URL','https://freerus.site/refunds')
 DATA=Path(os.getenv('FREE_RUS_BOT_DATA','/var/lib/free-rus-sales-bot')); DB=DATA/'sales.sqlite3'
 LOG=logging.getLogger('free-rus-bot')
-PLANS={'trial':('Тест VPN FREE RUS — 3 дня',0,3),'month':('VPN FREE RUS — первый месяц',99,30),'renew':('VPN FREE RUS — 1 месяц',199,30),'year':('VPN FREE RUS — 1 год',1199,365)}
+PLANS={'trial':('Тест FREE RUS VPN — 3 дня',0,3),'month':('FREE RUS VPN — первый месяц',99,30),'renew':('FREE RUS VPN — 1 месяц',199,30),'year':('FREE RUS VPN — 1 год',1199,365)}
 
 def api(method,data):
     req=urllib.request.Request(f'{TG}/{method}',data=json.dumps(data).encode(),headers={'Content-Type':'application/json'})
@@ -36,7 +36,7 @@ def message(chat,text,buttons=None):
 
 def send_config(chat,config):
     boundary='----freeRus'+uuid.uuid4().hex; parts=[]
-    for key,value in {'chat_id':str(chat),'caption':'Ваш персональный конфиг VPN FREE RUS. Не пересылайте его другим людям.'}.items():
+    for key,value in {'chat_id':str(chat),'caption':'Ваш персональный конфиг FREE RUS VPN. Не пересылайте его другим людям.'}.items():
         parts.append(f'--{boundary}\r\nContent-Disposition: form-data; name="{key}"\r\n\r\n{value}\r\n'.encode())
     parts.append(f'--{boundary}\r\nContent-Disposition: form-data; name="document"; filename="vpn-free-rus.conf"\r\nContent-Type: text/plain\r\n\r\n'.encode()+config.encode()+b'\r\n')
     parts.append(f'--{boundary}--\r\n'.encode())
@@ -87,7 +87,7 @@ def deliver_config(chat,user,client_id):
         pending_path(client_id).unlink(missing_ok=True)
         return message(chat,'Срок этого доступа завершён. Выберите тариф для нового подключения.',[[{'text':'Тарифы','callback_data':'menu'}]])
     if row[1]:
-        sent=api('sendDocument',{'chat_id':chat,'document':row[1],'caption':'Ваш персональный конфиг VPN FREE RUS. Не пересылайте его другим людям.'})
+        sent=api('sendDocument',{'chat_id':chat,'document':row[1],'caption':'Ваш персональный конфиг FREE RUS VPN. Не пересылайте его другим людям.'})
     else:
         path=pending_path(client_id)
         if not path.exists():raise RuntimeError('Pending configuration unavailable')
@@ -111,7 +111,7 @@ def retry_delivery(chat,user):
 
 
 def support_menu(chat):
-    return message(chat,'Поддержка и документы VPN FREE RUS',[
+    return message(chat,'Поддержка и документы FREE RUS VPN',[
       [{'text':'💬 Написать в поддержку','url':SUPPORT_URL}],
       [{'text':'📄 Условия сервиса','url':TERMS_URL},{'text':'↩️ Возврат','url':REFUNDS_URL}]])
 
@@ -152,7 +152,7 @@ def my_access(chat,user):
 def show_menu(chat,user):
     monthly='⭐ Продлить на месяц — 199 Stars' if has_paid_order(user) else '⭐ Первый месяц — 99 Stars'
     action='renew' if has_paid_order(user) else 'month'
-    message(chat,'VPN FREE RUS\n\n🆓 Тест — 3 дня бесплатно\n⭐ Первый месяц — 99 Stars\n⭐ Далее — 199 Stars/месяц\n⭐ Годовой — 1 199 Stars',[
+    message(chat,'FREE RUS VPN\n\n🆓 Тест — 3 дня бесплатно\n⭐ Первый месяц — 99 Stars\n⭐ Далее — 199 Stars/месяц\n⭐ Годовой — 1 199 Stars',[
       [{'text':'📱 Открыть приложение','web_app':{'url':WEB_APP_URL}}],
       [{'text':'📦 Мой доступ','callback_data':'access'}],
       [{'text':'🆓 Тест 3 дня','callback_data':'trial'}],
