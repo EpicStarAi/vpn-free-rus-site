@@ -6,14 +6,13 @@ import { useState } from "react";
 import { Logo } from "./Logo";
 
 const TRIAL = "https://t.me/FREE_RUS_VPN_BOT?start=trial";
+const CHANNEL = "https://t.me/INTERNET_BEZ_GRANIC_RUS";
 
 const navigation = [
-  ["VPN FREE RUS", "/epic-vpn"],
-  ["Тарифы", "/epic-vpn#plans"],
-  ["Наташа", "/natasha"],
-  ["AI-агенты", "/ai-agents"],
-  ["Услуги", "/sales"],
-  ["О проекте", "/about"],
+  ["Тарифы", "/#plans"],
+  ["Подключение", "/#connect"],
+  ["Скачать", "/#download"],
+  ["Вопросы", "/#faq"],
 ] as const;
 
 export function SiteHeader() {
@@ -27,10 +26,10 @@ export function SiteHeader() {
         <nav className={open ? "main-nav is-open" : "main-nav"} aria-label="Основная навигация">
           {navigation.map(([label, href]) => {
             const pathOnly = href.split("#")[0];
-            const active =
+            const active = !href.includes("#") && (
               pathOnly === "/"
                 ? pathname === "/"
-                : pathname === pathOnly || pathname.startsWith(`${pathOnly}/`);
+                : pathname === pathOnly || pathname.startsWith(`${pathOnly}/`));
 
             return (
               <Link
@@ -43,6 +42,7 @@ export function SiteHeader() {
               </Link>
             );
           })}
+          <a href={CHANNEL} aria-label="Telegram-канал FREE RUS" onClick={() => setOpen(false)}>Канал</a>
         </nav>
         <a className="header-telegram" href={TRIAL}>
           <span aria-hidden="true">↗</span> Тест VPN

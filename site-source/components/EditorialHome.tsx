@@ -64,7 +64,7 @@ const financeNotes = [
 
 const partnerVpnPoints = [
   "Telegram Mini App, админ-панель и API живут в отдельном VPN-проекте.",
-  "На FreeRUS показываем партнёрский вход и собираем заявки на ранний доступ.",
+  "На FREE RUS VPN показываем партнёрский вход и собираем заявки на ранний доступ.",
   "Подключение, оплата и выдача конфигураций не смешиваются с редакционным кабинетом.",
 ] as const;
 
@@ -331,7 +331,7 @@ export function EditorialHome() {
           <span>AI-платформа</span>
           <h2 id="platform-title">От медиа к личному кабинету для бизнеса</h2>
           <p>
-            FreeRUS остаётся новостным и редакционным продуктом, но первый
+            FREE RUS VPN остаётся новостным и редакционным продуктом, но первый
             коммерческий сценарий становится проще: клиент даёт ссылку,
             подтверждает доступ и получает понятный разбор своей деятельности.
           </p>
@@ -385,7 +385,7 @@ export function EditorialHome() {
       <section className="editorial-partner-ad" aria-labelledby="partner-vpn-title">
         <div className="editorial-partner-mark">
           <Shield size={34} weight="regular" aria-hidden="true" />
-          <span>Партнёр FreeRUS</span>
+          <span>Партнёр FREE RUS VPN</span>
         </div>
         <div className="editorial-partner-copy">
           <p>Спонсорский VPN-проект</p>

@@ -1,0 +1,323 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -5,7 +5,7 @@
+ 
+ set(PROJECT AmneziaVPN)
+ if(NOT AMNEZIAVPN_VERSION)
+-    set(AMNEZIAVPN_VERSION 5.0.3.2 CACHE STRING "Client app version")
++    set(AMNEZIAVPN_VERSION 5.0.3.3 CACHE STRING "Client app version")
+ endif()
+ 
+ set(QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP ON CACHE BOOL "" FORCE)
+--- a/client/CMakeLists.txt
++++ b/client/CMakeLists.txt
+@@ -170,6 +170,8 @@
+ endif()
+ 
+ if(WIN32)
++    set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/amneziavpn.rc PROPERTIES
++        OBJECT_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/images/app.ico")
+     configure_file(
+         ${CMAKE_CURRENT_LIST_DIR}/platforms/windows/amneziavpn.rc.in
+         ${CMAKE_CURRENT_BINARY_DIR}/amneziavpn.rc
+--- a/client/amneziaApplication.cpp
++++ b/client/amneziaApplication.cpp
+@@ -177,7 +177,7 @@
+ 
+     // FREE RUS: seed built-in AWG server so first launch opens Home/Connect
+     if (m_coreController) {
+-        m_coreController->ensureBuiltinDefaultServer();
++        // Users import their individual profile delivered by FREE_RUS_VPN_BOT.
+     }
+ 
+     m_engine->load(url);
+--- a/client/core/controllers/coreController.cpp
++++ b/client/core/controllers/coreController.cpp
+@@ -380,39 +380,3 @@
+         m_importController->importConfig();
+     }
+ }
+-
+-void CoreController::ensureBuiltinDefaultServer()
+-{
+-    if (!m_serversController || m_serversController->getServersCount() > 0) {
+-        return;
+-    }
+-    if (!m_importController) {
+-        return;
+-    }
+-
+-    QFile confFile(QStringLiteral(":/freerus/default_server.conf"));
+-    if (!confFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+-        qWarning() << "FREE RUS: failed to open builtin default_server.conf";
+-        return;
+-    }
+-    const QString data = QString::fromUtf8(confFile.readAll());
+-    confFile.close();
+-    if (data.trimmed().isEmpty()) {
+-        qWarning() << "FREE RUS: builtin default_server.conf is empty";
+-        return;
+-    }
+-
+-    importConfigFromData(data);
+-
+-    if (m_serversController->getServersCount() > 0) {
+-        const QString serverId = m_serversController->getServerId(0);
+-        if (!serverId.isEmpty()) {
+-            m_serversController->renameServer(serverId, QStringLiteral("Сервер 1"));
+-            m_serversController->setDefaultServer(serverId);
+-        }
+-        qInfo() << "FREE RUS: imported builtin default server";
+-    } else {
+-        qWarning() << "FREE RUS: builtin default server import produced no servers";
+-    }
+-}
+-
+--- a/client/core/controllers/coreController.h
++++ b/client/core/controllers/coreController.h
+@@ -101,7 +101,6 @@
+ 
+     void openConnectionByIndex(int serverIndex);
+     void importConfigFromData(const QString &data);
+-    void ensureBuiltinDefaultServer();
+     void updateTranslator(const QLocale &locale);
+ 
+ signals:
+--- a/client/platforms/windows/amneziavpn.rc.in
++++ b/client/platforms/windows/amneziavpn.rc.in
+@@ -21,7 +21,7 @@
+         BLOCK "040904E4"
+         BEGIN
+             VALUE "CompanyName",        VER_COMPANYNAME_STR
+-            VALUE "FileDescription",    "@CMAKE_PROJECT_DESCRIPTION@"
++            VALUE "FileDescription",    VER_FILEDESCRIPTION_STR
+             VALUE "FileVersion",        "@CMAKE_PROJECT_VERSION@"
+             VALUE "InternalName",       VER_INTERNALNAME_STR
+             VALUE "LegalCopyright",     VER_LEGALCOPYRIGHT_STR
+--- a/client/platforms/windows/daemon/windowsdaemon.h
++++ b/client/platforms/windows/daemon/windowsdaemon.h
+@@ -14,7 +14,7 @@
+ #include "windowstunnelservice.h"
+ #include "wireguardutilswindows.h"
+ 
+-#define TUNNEL_SERVICE_NAME L"AmneziaWGTunnel$AmneziaVPN"
++#define TUNNEL_SERVICE_NAME L"AmneziaWGTunnel$FreeRusVPN"
+ 
+ class WindowsDaemon final : public Daemon {
+   Q_DISABLE_COPY_MOVE(WindowsDaemon)
+--- a/client/platforms/windows/daemon/windowstunnelservice.cpp
++++ b/client/platforms/windows/daemon/windowstunnelservice.cpp
+@@ -148,7 +148,7 @@
+ 
+   logger.debug() << "Service:" << qApp->applicationFilePath();
+ 
+-  service = CreateService(scm, TUNNEL_SERVICE_NAME, L"Amnezia VPN (tunnel)",
++  service = CreateService(scm, TUNNEL_SERVICE_NAME, L"FREE RUS VPN (tunnel)",
+                           SERVICE_ALL_ACCESS, SERVICE_WIN32_OWN_PROCESS,
+                           SERVICE_DEMAND_START, SERVICE_ERROR_NORMAL,
+                           (const wchar_t*)serviceCmdline.utf16(), nullptr, 0,
+--- a/client/resources/freerus.qrc
++++ b/client/resources/freerus.qrc
+@@ -1,5 +1,5 @@
+ <RCC>
+     <qresource prefix="/freerus">
+-        <file>default_server.conf</file>
++        <file>README.txt</file>
+     </qresource>
+ </RCC>
+--- a/cmake/CPack.cmake
++++ b/cmake/CPack.cmake
+@@ -1,14 +1,14 @@
+-set(CPACK_PACKAGE_VENDOR            AmneziaVPN)
++set(CPACK_PACKAGE_VENDOR            "FREE RUS VPN")
+ set(CPACK_PACKAGE_VERSION           ${AMNEZIAVPN_VERSION})
+ if(WIN32)
+-    set(CPACK_PACKAGE_FILE_NAME "AmneziaVPN_${AMNEZIAVPN_VERSION}_windows_x64")
++    set(CPACK_PACKAGE_FILE_NAME "FREE-RUS-VPN-Setup")
+ elseif(APPLE AND NOT IOS AND NOT MACOS_NE)
+     set(CPACK_PACKAGE_FILE_NAME "AmneziaVPN_${AMNEZIAVPN_VERSION}_macos_x64")
+ elseif(LINUX AND NOT ANDROID)
+     set(CPACK_PACKAGE_FILE_NAME "AmneziaVPN_${AMNEZIAVPN_VERSION}_linux_x64")
+ endif()
+-set(CPACK_PACKAGE_INSTALL_DIRECTORY AmneziaVPN)
+-set(CPACK_PACKAGE_EXECUTABLES       AmneziaVPN AmneziaVPN)
++set(CPACK_PACKAGE_INSTALL_DIRECTORY FreeRusVPN)
++set(CPACK_PACKAGE_EXECUTABLES       FreeRusVPN "FREE RUS VPN")
+ set(CPACK_PRE_BUILD_SCRIPTS         ${CMAKE_CURRENT_LIST_DIR}/sign_binaries.cmake)
+ set(CPACK_POST_BUILD_SCRIPTS        ${CMAKE_CURRENT_LIST_DIR}/sign_packages.cmake)
+ set(CPACK_PROJECT_CONFIG_FILE       ${CMAKE_CURRENT_LIST_DIR}/CPackOptions.cmake)
+@@ -23,8 +23,8 @@
+ endif()
+ 
+ # === CPack IFW generator settings ===
+-set(CPACK_IFW_PACKAGE_NAME                          AmneziaVPN)
+-set(CPACK_IFW_PACKAGE_TITLE                         AmneziaVPN)
++set(CPACK_IFW_PACKAGE_NAME                          "FREE RUS VPN")
++set(CPACK_IFW_PACKAGE_TITLE                         "FREE RUS VPN")
+ set(CPACK_IFW_PACKAGE_WIZARD_DEFAULT_WIDTH          600)
+ set(CPACK_IFW_PACKAGE_WIZARD_DEFAULT_HEIGHT         380)
+ set(CPACK_IFW_PACKAGE_WIZARD_STYLE                  Modern)
+@@ -32,6 +32,8 @@
+ set(CPACK_IFW_PACKAGE_ALLOW_SPACE_IN_PATH           ON)
+ set(CPACK_IFW_PACKAGE_ALLOW_NON_ASCII_CHARACTERS    ON)
+ set(CPACK_IFW_PACKAGE_CONTROL_SCRIPT                ${CMAKE_SOURCE_DIR}/deploy/installer/qif/controlscript.js)
++
++set(CPACK_IFW_PACKAGE_WINDOW_ICON "${CMAKE_SOURCE_DIR}/client/images/icon.png")
+ 
+ # === CPack WIX generator settings ===
+ set(CPACK_WIX_VERSION               4)
+@@ -66,6 +68,8 @@
+ endif()
+ 
+ if(WIN32)
++    install(FILES ${CMAKE_SOURCE_DIR}/LICENSE ${CMAKE_SOURCE_DIR}/THIRD_PARTY_LICENSES.md
++        DESTINATION "." COMPONENT AmneziaVPN)
+     install(FILES
+         ${CMAKE_SOURCE_DIR}/deploy/data/windows/post_install.cmd
+         ${CMAKE_SOURCE_DIR}/deploy/data/windows/post_uninstall.cmd
+@@ -94,6 +98,8 @@
+ 
+ include(CPackIFW)
+ cpack_ifw_configure_component(AmneziaVPN
++    DISPLAY_NAME "FREE RUS VPN"
++    DESCRIPTION "FREE RUS VPN for Windows"
+     VERSION ${AMNEZIAVPN_VERSION}
+     RELEASE_DATE ${RELEASE_DATE}
+     REQUIRES_ADMIN_RIGHTS
+@@ -103,7 +109,7 @@
+ 
+ include(CPack)
+ cpack_add_component(Uninstall
+-    DISPLAY_NAME "Uninstall AmneziaVPN"
++    DISPLAY_NAME "Uninstall FREE RUS VPN"
+     REQUIRES_ADMIN_RIGHTS
+     DISABLED
+ )
+--- a/deploy/data/windows/post_install.cmd
++++ b/deploy/data/windows/post_install.cmd
+@@ -1,5 +1,3 @@
+-sc stop AmneziaWGTunnel$AmneziaVPN
+-sc delete AmneziaWGTunnel$AmneziaVPN
+-taskkill /IM "AmneziaVPN-service.exe" /F
+-taskkill /IM "AmneziaVPN.exe" /F
++@echo off
++rem Service startup is handled by the installer after successful installation.
+ exit /b 0
+--- a/deploy/data/windows/post_uninstall.cmd
++++ b/deploy/data/windows/post_uninstall.cmd
+@@ -1,32 +1,7 @@
+-set AmneziaPath=%~dp0
+-echo %AmneziaPath%
+-
+-rem Define directories for logs
+-set "ORG_DIR=%AppData%\AmneziaVPN.ORG"
+-set "USER_APP_DIR=%ORG_DIR%\AmneziaVPN"
+-set "USER_LOG_DIR=%USER_APP_DIR%\log"
+-set "SYS_APP_DIR=%ProgramData%\AmneziaVPN"
+-set "SYS_LOG_DIR=%SYS_APP_DIR%\log"
+-set "SYS_LOG_FILE=%SYS_LOG_DIR%\AmneziaVPN-service.log"
+-
+-timeout /t 1
+-sc stop AmneziaVPN-service
+-sc delete AmneziaVPN-service
+-sc stop AmneziaWGTunnel$AmneziaVPN
+-sc delete AmneziaWGTunnel$AmneziaVPN
+-taskkill /IM "AmneziaVPN-service.exe" /F
+-taskkill /IM "AmneziaVPN.exe" /F
+-
+-rem Delete the service log file under ProgramData
+-if exist "%SYS_LOG_FILE%" del /F /Q "%SYS_LOG_FILE%"
+-if exist "%SYS_LOG_DIR%" rmdir /S /Q "%SYS_LOG_DIR%"
+-rem Try to remove application dir if empty
+-rd "%SYS_APP_DIR%" 2>nul
+-
+-rem Delete client logs under current user's AppData\Roaming (Organization\Application)
+-if exist "%USER_LOG_DIR%" rmdir /S /Q "%USER_LOG_DIR%"
+-rem Try to remove app and org directories if empty
+-rd "%USER_APP_DIR%" 2>nul
+-rd "%ORG_DIR%" 2>nul
+-
++@echo off
++sc stop FreeRusVPN-service
++sc delete FreeRusVPN-service
++sc stop AmneziaWGTunnel$FreeRusVPN
++sc delete AmneziaWGTunnel$FreeRusVPN
++rem Preserve user profiles and do not stop unrelated Amnezia installations.
+ exit /b 0
+--- a/deploy/installer/qif/componentscript.js
++++ b/deploy/installer/qif/componentscript.js
+@@ -6,13 +6,13 @@
+ 
+ function serviceName()
+ {
+-    return (appName() + "-service")
++    return "FreeRusVPN-service"
+ }
+ 
+ function appExecutableFileName()
+ {
+     if (runningOnWindows()) {
+-        return appName() + ".exe";
++        return "FreeRusVPN.exe";
+     } else {
+         return appName();
+     }
+@@ -86,8 +86,8 @@
+ 
+         let pu_path = installer.value("TargetDir").replace(/\//g, '\\') + "\\"
+         component.addElevatedOperation("Execute",
+-                                       ["sc", "create", serviceName(), "binpath=", pu_path + serviceName() + ".exe",
+-                                        "start=", "auto", "depend=", "BFE/nsi"],
++                                       ["sc", "create", serviceName(), "binpath=", '"' + pu_path + serviceName() + '.exe"',
++                                        "start=", "auto", "depend=", "BFE/nsi", "DisplayName=", "FREE RUS VPN Service"],
+                                         "UNDOEXECUTE", "cmd", "/c", pu_path + "post_uninstall.cmd");
+ 										
+         component.addElevatedOperation("Execute", "cmd", "/c", pu_path + "post_install.cmd");
+--- a/deploy/installer/qif/controlscript.js
++++ b/deploy/installer/qif/controlscript.js
+@@ -12,7 +12,7 @@
+ function appExecutableFileName()
+ {
+     if (runningOnWindows()) {
+-        return appName() + ".exe";
++        return "FreeRusVPN.exe";
+     } else {
+         return appName();
+     }
+@@ -21,8 +21,8 @@
+ function appInstalled()
+ {
+     if (runningOnWindows()) {
+-        appInstalledUninstallerPath = installer.value("RootDir") + "Program Files/AmneziaVPN/maintenancetool.exe";
+-        appInstalledUninstallerPath_x86 = installer.value("RootDir") + "Program Files (x86)/AmneziaVPN/maintenancetool.exe";
++        appInstalledUninstallerPath = installer.value("RootDir") + "Program Files/FreeRusVPN/maintenancetool.exe";
++        appInstalledUninstallerPath_x86 = installer.value("RootDir") + "Program Files (x86)/FreeRusVPN/maintenancetool.exe";
+     } else if (runningOnMacOS()){
+         appInstalledUninstallerPath = "/Applications/" + appName() + ".app/maintenancetool.app/Contents/MacOS/maintenancetool";
+     } else if (runningOnLinux()){
+--- a/service/server/CMakeLists.txt
++++ b/service/server/CMakeLists.txt
+@@ -514,3 +514,8 @@
+ install(SCRIPT ${QT_DEPLOY_SCRIPT}
+     COMPONENT AmneziaVPN
+ )
++
++# Match SERVICE_NAME expected by the branded client and Windows SCM.
++if(WIN32)
++    set_target_properties(${PROJECT} PROPERTIES OUTPUT_NAME "${CLIENT_SERVICE_NAME}")
++endif()
+--- a/service/server/systemservice.cpp
++++ b/service/server/systemservice.cpp
+@@ -15,7 +15,7 @@
+ SystemService::SystemService(int argc, char **argv)
+     : QtService<QCoreApplication>(argc, argv, SERVICE_NAME)
+ {
+-    setServiceDescription("Service for AmneziaVPN");
++    setServiceDescription("FREE RUS VPN Service");
+ 
+ #ifdef Q_OS_WIN
+     if(argc > 2){
+--- /dev/null
++++ b/client/resources/README.txt
+@@ -0,0 +1 @@
++FREE RUS VPN: get your individual connection profile from https://t.me/FREE_RUS_VPN_BOT and import it in the application.

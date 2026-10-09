@@ -7583,3 +7583,90 @@ a {
     font-size: 38px;
   }
 }
+
+/* Installer downloads shared by the home and VPN pages. */
+.vpn-downloads { padding-block: clamp(36px, 6vw, 80px); scroll-margin-top: 100px; }
+.vpn-download-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 28px; }
+.vpn-download-card { min-width: 0; padding: clamp(22px, 3vw, 36px); border: 1px solid #3b4248; border-radius: 16px; background: #111820; color: #f4f7f9; }
+.vpn-download-card-top { display: flex; justify-content: space-between; gap: 16px; color: #adbac7; font: 600 12px/1.5 sans-serif; letter-spacing: .08em; }
+.vpn-download-card h3 { margin: 24px 0 12px; font-size: clamp(28px, 3vw, 40px); }
+.vpn-download-card > p { color: #adbac7; line-height: 1.7; min-height: 3.4em; }
+.vpn-download-button { display: flex; justify-content: space-between; width: 100%; min-height: 52px; margin: 24px 0 14px; gap: 12px; white-space: normal; text-align: left; }
+.vpn-download-card small { display: block; overflow-wrap: anywhere; color: #adbac7; font-size: 12px; }
+.vpn-downloads details { padding-block: 20px; border-top: 1px solid #3b4248; margin-top: 22px; }
+.vpn-downloads summary { cursor: pointer; font-size: 15px; line-height: 1.5; }
+.vpn-downloads details p { color: #adbac7; line-height: 1.7; font-size: 14px; margin-top: 16px; overflow-wrap: anywhere; }
+.vpn-downloads details a { text-decoration: underline; }
+.vpn-download-next { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 24px; }
+.vpn-download-next h3 { font-size: 20px; margin-bottom: 8px; }
+.vpn-download-next p { color: #adbac7; line-height: 1.6; }
+.vpn-download-next p a { text-decoration: underline; }
+.vpn-downloads :is(a, summary):focus-visible { outline: 3px solid #c8f36a; outline-offset: 5px; }
+@media (max-width: 700px) {
+  .vpn-download-grid { grid-template-columns: 1fr; gap: 16px; }
+  .vpn-download-next { align-items: stretch; flex-direction: column; }
+  .vpn-download-next .button { text-align: center; }
+  .vpn-download-card > p { min-height: 0; }
+}
+
+/* A compact sales landing with one path from trial to paid access. */
+.vpn-brand { display: inline-flex; align-items: center; gap: .3em; font: 800 21px/1.2 Arial, sans-serif; letter-spacing: -.6px; white-space: nowrap; }
+.vpn-brand b { color: #5296ff; }
+.vpn-sales { background: #0b1017; color: #f6f8fb; }
+.vpn-sales .section-shell { max-width: 1140px; }
+.vpn-sales :is(h1,h2,h3) { font-family: Arial, sans-serif; text-transform: none; letter-spacing: -.035em; }
+.vpn-sales .button { min-height: 48px; border-radius: 9px; padding: 14px 20px; font-size: 14px; white-space: normal; }
+.vpn-sales-hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: center; padding-block: 76px 64px; }
+.vpn-sales-label { color: #9ebeff; font-size: 13px; margin-bottom: 20px; }
+.vpn-sales h1 { font-size: clamp(34px,4vw,56px); line-height: 1.12; font-weight: 750; margin: 0 0 24px; }
+.vpn-sales-lead { color: #b0bbca; font-size: 17px; line-height: 1.75; max-width: 540px; }
+.vpn-sales-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.vpn-sales-caption { margin-top: 18px; color: #a7b2c2; font-size: 13px; }
+.vpn-sales-start { border: 1px solid #2c3b50; border-radius: 16px; background: #131e2d; padding: 30px; }
+.vpn-sales-start > span { color: #aabedb; font-size: 14px; }
+.vpn-sales-start strong { display: block; font: 700 36px/1.2 Arial,sans-serif; margin: 16px 0; }
+.vpn-sales-start p,.vpn-sales-start li { color: #b8c5d7; font-size: 14px; line-height: 1.7; }
+.vpn-sales-start ul { padding-left: 19px; margin: 20px 0; }
+.vpn-sales-start > a { color: #91b9ff; font-size: 14px; }
+.vpn-sales-section { padding-block: 48px; scroll-margin-top: 100px; }
+.vpn-sales-heading { margin-bottom: 28px; }
+.vpn-sales h2,.vpn-sales .corp-section-title h2 { font-size: clamp(27px,3vw,34px); line-height: 1.2; margin: 0 0 12px; }
+.vpn-sales-heading > p { color: #acb8c8; font-size: 15px; line-height: 1.6; }
+.vpn-sales-plans { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
+.vpn-sales-plan { border: 1px solid #2c3645; background: #121923; border-radius: 14px; padding: 26px; }
+.vpn-sales-plan.is-featured { border-color: #4b91ff; background: #132139; }
+.vpn-sales-plan h3 { font-size: 19px; margin: 0 0 24px; }
+.vpn-sales-price { font: 700 38px/1.1 Arial,sans-serif; margin-bottom: 9px; }
+.vpn-sales-plan > span { color: #b3c0d0; font-size: 14px; }
+.vpn-sales-plan-note { color: #b3c0d0; font-size: 13px; margin: 20px 0; min-height: 40px; }
+.vpn-sales-plan .button { width: 100%; text-align: center; justify-content: center; }
+.vpn-sales-payment-note { color: #a8b5c6; font-size: 13px; line-height: 1.7; margin-top: 20px; max-width: 760px; }
+.vpn-sales-steps { padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 30px; }
+.vpn-sales-steps li > span { display: grid; place-items: center; background: #192b46; border-radius: 50%; width: 34px; height: 34px; color: #9bbfff; margin-bottom: 16px; }
+.vpn-sales-steps h3 { font-size: 18px; margin-bottom: 12px; }
+.vpn-sales-steps p { font-size: 14px; color: #acb8c8; line-height: 1.7; }
+.vpn-sales .vpn-downloads { padding-block: 48px; }
+.vpn-sales .corp-section-title > p { max-width: 650px; font-size: 15px; line-height: 1.7; }
+.vpn-sales .vpn-download-card h3 { font-size: 28px; }
+.vpn-sales-faq { max-width: 850px; }
+.vpn-sales-faq details { border-bottom: 1px solid #2c3645; padding-block: 20px; }
+.vpn-sales-faq summary { cursor: pointer; font-size: 16px; line-height: 1.5; }
+.vpn-sales-faq p { margin-top: 14px; color: #acb8c8; font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
+.vpn-sales-faq a { color: #91b9ff; text-decoration: underline; }
+.vpn-sales-final { padding-block: 48px 64px; text-align: center; }
+.vpn-sales-final p { margin-bottom: 24px; color: #acb8c8; font-size: 15px; }
+.vpn-sales-footer { border-top: 1px solid #293241; background: #0b1017; padding-block: 32px; }
+.vpn-sales-footer > div { display: flex; justify-content: space-between; gap: 32px; }
+.vpn-sales-footer p,.vpn-sales-footer span { font-size: 12px; color: #a9b6c7; margin-top: 12px; }
+.vpn-sales-footer-links { display: flex; align-items: flex-start; flex-direction: column; gap: 12px; font-size: 12px; color: #b7c3d3; overflow-wrap: anywhere; min-width: 0; }
+.vpn-sales :is(a,summary):focus-visible { outline: 3px solid #91b9ff; outline-offset: 4px; }
+@media(max-width:800px) {
+ .vpn-sales-hero { grid-template-columns: 1fr; gap: 28px; padding-block: 40px; }
+ .vpn-sales-start { padding: 24px; }
+ .vpn-sales-plans,.vpn-sales-steps { grid-template-columns: 1fr; gap: 16px; }
+ .vpn-sales-plan-note { min-height: 0; }
+ .vpn-sales-section,.vpn-sales .vpn-downloads { padding-block: 32px; }
+ .vpn-sales-footer > div { flex-direction: column; }
+ .vpn-sales-actions .button { width: 100%; justify-content: center; }
+ .vpn-sales h1 { font-size: 38px; }
+}
