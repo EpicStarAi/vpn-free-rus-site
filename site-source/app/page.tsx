@@ -2,8 +2,22 @@ import type { Metadata } from "next";
 import { VpnDownloads } from "@/components/VpnDownloads";
 
 export const metadata: Metadata = {
-  title: { absolute: "FREE RUS VPN — VPN для Android и Windows" },
-  description: "Попробуйте FREE RUS VPN 3 дня бесплатно. Первый месяц — 99 Stars. Приложения для Android и Windows, оформление через Telegram.",
+  title: { absolute: "VPN для России на Android и Windows — 3 дня бесплатно | FREE RUS VPN" },
+  description: "Скачайте FREE RUS VPN для телефона и компьютера. Подключение через Telegram, 3 дня бесплатно, первый месяц — 99 Stars.",
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    siteName: "FREE RUS VPN",
+    title: "VPN для России на Android и Windows — 3 дня бесплатно",
+    description: "FREE RUS VPN для телефона и компьютера. Подключение через Telegram, 3 дня бесплатно.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "FREE RUS VPN" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VPN для России на Android и Windows — 3 дня бесплатно",
+    description: "FREE RUS VPN для телефона и компьютера. 3 дня бесплатно.",
+    images: ["/og.png"],
+  },
 };
 
 const bot = "https://t.me/FREE_RUS_VPN_BOT";
@@ -19,7 +33,7 @@ export default function HomePage() {
       <section className="vpn-sales-hero section-shell">
         <div>
           <p className="vpn-sales-label">FREE RUS VPN · Android и Windows</p>
-          <h1>VPN для телефона<br />и компьютера</h1>
+          <h1>VPN для России:<br />телефон и компьютер</h1>
           <p className="vpn-sales-lead">Скачайте приложение и подключитесь по инструкции в Telegram. Начните с бесплатного теста — выберите тариф, когда проверите сервис.</p>
           <div className="vpn-sales-actions">
             <a className="button button-primary" href={`${bot}?start=trial`}>Попробовать 3 дня бесплатно</a>

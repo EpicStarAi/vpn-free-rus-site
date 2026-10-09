@@ -8,6 +8,8 @@ test("VPN entry points use one landing and actual bot prices", async () => {
   const [page, alias, header, layout] = await Promise.all([read("app/page.tsx"), read("app/epic-vpn/page.tsx"), read("components/SiteHeader.tsx"), read("app/layout.tsx")]);
   assert.match(layout, /<html lang="ru">/);
   assert.match(page, /VPN для телефона/);
+  assert.match(page, /VPN для России/);
+  assert.match(await read("worker/index.ts"), /www\.freerus\.site[\s\S]*301/);
   for (const price of ["99 Stars", "199 Stars", "1 199 Stars"]) assert.ok(page.includes(price));
   for (const start of ["trial", "buy_month", "buy_year"]) assert.ok(page.includes(start));
   assert.match(page, /\/access/);
