@@ -66,7 +66,7 @@ export default function HomePage() {
           <details><summary>На каких устройствах работает приложение?</summary><p>На странице доступны установщики для Android и Windows. Скачайте подходящий файл и завершите настройку по инструкции в боте.</p></details>
           <details><summary>Скачал приложение. Что дальше?</summary><p>Откройте бота и отправьте /trial для бесплатного теста. Сохраните полученный .conf, нажмите «+» в приложении и импортируйте файл. Если файл потерялся, отправьте боту /access.</p></details>
           <details><summary>Почему бот не отвечает после перехода?</summary><p>Нажмите «Запустить» в чате бота. Если поверх чата открыто мини-приложение, закройте его и отправьте /trial. Для повторной отправки действующего файла используйте /access.</p></details>
-          <details><summary>Куда написать, если не получается подключиться?</summary><p>Начните с инструкции в <a href={bot}>боте FREE RUS VPN</a>. Если вопрос остался, напишите на <a href="mailto:internetbezogranicheniy@gmail.com">internetbezogranicheniy@gmail.com</a>.</p></details>
+          <details><summary>Куда написать, если не получается подключиться?</summary><p>Начните с инструкции в <a href={bot}>боте FREE RUS VPN</a>. Если вопрос остался, напишите на <a href="mailto:internetbezogranicheniy@gmail.com">internetbezogranicheniy@gmail.com</a>. Новости, обновления и статус сервиса — в <a href="https://t.me/INTERNET_BEZ_GRANIC_RUS">Telegram-канале FREE RUS</a>.</p></details>
         </div>
       </section>
       <section className="vpn-sales-final section-shell"><h2>Проверьте VPN бесплатно</h2><p>Три дня, чтобы попробовать на своём устройстве.</p><a className="button button-primary" href={`${bot}?start=trial`}>Получить тест на 3 дня</a></section>

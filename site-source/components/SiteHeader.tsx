@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Logo } from "./Logo";
 
 const TRIAL = "https://t.me/FREE_RUS_VPN_BOT?start=trial";
+const CHANNEL = "https://t.me/INTERNET_BEZ_GRANIC_RUS";
 
 const navigation = [
   ["Тарифы", "/#plans"],
@@ -41,6 +42,7 @@ export function SiteHeader() {
               </Link>
             );
           })}
+          <a href={CHANNEL} aria-label="Telegram-канал FREE RUS" onClick={() => setOpen(false)}>Канал</a>
         </nav>
         <a className="header-telegram" href={TRIAL}>
           <span aria-hidden="true">↗</span> Тест VPN

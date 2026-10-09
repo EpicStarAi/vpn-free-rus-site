@@ -26,7 +26,7 @@ export function VpnDownloads() {
         ))}
       </div>
       <div className="vpn-download-next">
-        <div><h3>Приложение установлено?</h3><p>Получите доступ и инструкцию по подключению в боте FREE RUS VPN.</p></div>
+        <div><h3>Приложение установлено?</h3><p>Получите доступ и инструкцию по подключению в боте FREE RUS VPN. Новости и обновления — в <a href="https://t.me/INTERNET_BEZ_GRANIC_RUS">Telegram-канале FREE RUS</a>.</p></div>
         <a className="button button-ghost" href="https://t.me/FREE_RUS_VPN_BOT?start=trial">Открыть Telegram ↗</a>
       </div>
       <details className="vpn-download-help">

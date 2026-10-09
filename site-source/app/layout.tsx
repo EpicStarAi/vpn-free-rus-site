@@ -118,7 +118,7 @@ export default async function RootLayout({
               email: corporateConfig.email,
               availableLanguage: "Russian",
             },
-            sameAs: ["https://t.me/FREE_RUS_VPN_BOT"],
+            sameAs: ["https://t.me/FREE_RUS_VPN_BOT", "https://t.me/INTERNET_BEZ_GRANIC_RUS"],
           }}
         />
         <a className="skip-link" href="#main">
