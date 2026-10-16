@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 
 const plans = {
-  trial: { label: "Тест 3 дня", price: "0 ₽", start: "trial" },
+  trial: { label: "Тест 30 дней", price: "0 ₽", start: "trial" },
   month: { label: "Первый месяц", price: "99 Stars", start: "buy_month" },
   year: { label: "Годовой доступ", price: "1 199 Stars", start: "buy_year" },
 } as const;

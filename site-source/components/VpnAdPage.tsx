@@ -37,7 +37,7 @@ export function VpnAdPage({ eyebrow, title, text, points = [] }: VpnAdPageProps)
             )}
             <div className="freerus-hub-actions">
               <a className="button button-primary" href={TRIAL_URL}>
-                Тест VPN 3 дня
+                Тест VPN 30 дней
               </a>
               <Link className="button button-ghost" href="/epic-vpn">
                 Тарифы FREE RUS VPN
@@ -48,7 +48,7 @@ export function VpnAdPage({ eyebrow, title, text, points = [] }: VpnAdPageProps)
             <span>Главный продукт</span>
             <strong>FREE RUS VPN</strong>
             <p>
-              Персональный профиль FREE RUS VPN, оформление в Telegram, 3 дня бесплатно. Эта
+              Персональный профиль FREE RUS VPN, оформление в Telegram, 30 дней бесплатно. Эта
               страница — короткий переход к VPN.
             </p>
             <div>
