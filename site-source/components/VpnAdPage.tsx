@@ -13,7 +13,7 @@ export type VpnAdPageProps = {
 export function vpnAdMetadata(title: string, description: string): Metadata {
   return {
     title,
-    description: `${description} Основной продукт FreeRUS — VPN FREE RUS.`,
+    description: `${description} FREE RUS VPN для Android и Windows.`,
   };
 }
 
@@ -23,7 +23,6 @@ export function VpnAdPage({ eyebrow, title, text, points = [] }: VpnAdPageProps)
       <section className="freerus-hub-hero">
         <div className="section-shell freerus-hub-hero-grid">
           <div className="freerus-hub-copy">
-            <span className="corp-powered">Powered by EPIC☠VPN AI</span>
             <span className="eyebrow eyebrow-light">{eyebrow}</span>
             <h1>
               <span>{title}</span>
@@ -38,18 +37,18 @@ export function VpnAdPage({ eyebrow, title, text, points = [] }: VpnAdPageProps)
             )}
             <div className="freerus-hub-actions">
               <a className="button button-primary" href={TRIAL_URL}>
-                Тест VPN 3 дня
+                Тест VPN 30 дней
               </a>
               <Link className="button button-ghost" href="/epic-vpn">
-                Тарифы VPN FREE RUS
+                Тарифы FREE RUS VPN
               </Link>
             </div>
           </div>
-          <aside className="freerus-hub-status" aria-label="VPN FREE RUS">
+          <aside className="freerus-hub-status" aria-label="FREE RUS VPN">
             <span>Главный продукт</span>
-            <strong>VPN FREE RUS</strong>
+            <strong>FREE RUS VPN</strong>
             <p>
-              AmneziaWG-конфиг, оформление в Telegram, 3 дня бесплатно. Эта
+              Персональный профиль FREE RUS VPN, оформление в Telegram, 30 дней бесплатно. Эта
               страница — короткий переход к VPN.
             </p>
             <div>

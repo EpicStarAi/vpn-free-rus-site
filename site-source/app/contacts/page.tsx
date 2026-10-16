@@ -13,7 +13,7 @@ export default function Page() {
       text="По VPN пишите в Telegram-бота FREE RUS VPN. Почта проекта — на сайте в подвале."
       points={[
     "Бот: @FREE_RUS_VPN_BOT",
-    "Тест 3 дня",
+    "Тест 30 дней",
     "Страница /epic-vpn"
       ]}
     />

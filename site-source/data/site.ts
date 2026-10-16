@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "Интернет без ограничений RUS",
-  shortName: "ИБО RUS",
+  name: "FREE RUS VPN",
+  shortName: "FREE RUS VPN",
   url: "https://freerus.site",
   email: "internetbezogranicheniy@gmail.com",
   social: {

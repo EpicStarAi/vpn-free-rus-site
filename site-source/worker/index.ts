@@ -29,6 +29,11 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
+    // Canonical host: permanent (301) redirect www and plain http to https://freerus.site.
+    if (url.hostname === "www.freerus.site" || (url.hostname === "freerus.site" && url.protocol === "http:")) {
+      return Response.redirect(`https://freerus.site${url.pathname}${url.search}`, 301);
+    }
+
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
       return handleImageOptimization(request, {

@@ -36,7 +36,7 @@ export const influencerFilters = [
 export const influencers: Influencer[] = [
   {
     id: "freerus-agency-project",
-    name: "FreeRUS Platform",
+    name: "FREE RUS VPN",
     initials: "FR",
     role: "Агентский проект",
     tagline: "Публичная витрина AI-агентства: AI-агенты, соцмедиа-управление, новости и партнёрский VPN-блок в одном контуре.",
